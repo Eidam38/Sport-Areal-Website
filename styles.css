@@ -1,0 +1,50 @@
+header{
+    display: flex;
+    background-color: #1E1E1E;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 14px 64px;
+    color: white;
+}
+
+#header_logo{
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
+
+#header_nav{
+    display: flex;
+    gap: 20px;
+    width: 560px;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+#about{
+    color: #1E1E1E;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+}
+.header_nav_item{
+    color: #FFFFFF;
+    padding: 10px 20px;
+    text-decoration: none;
+}
+
+#login{
+    color: #1E1E1E;
+    background-color: #FFFFFF;
+    height: 32px;
+    min-width: 124px;
+    border-radius: 5px;
+}
+
+#signup{
+    color: #FFFFFF;
+    background-color: #2C2C2C;
+    height: 32px;
+    min-width: 124px;
+    border-radius: 5px;
+}
