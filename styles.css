@@ -4,10 +4,12 @@ body{
 }
 
 header{
+    position: fixed;
     display: flex;
     background-color: #1E1E1E;
     justify-content: space-between;
     align-items: center;
+    width: 92%;
     gap: 20px;
     padding: 14px 64px;
     margin: 0;
@@ -34,14 +36,14 @@ header{
 }
 .header_nav_item{
     color: #FFFFFF;
-    padding: 10px 20px;
+    padding: 5px 20px;
     text-decoration: none;
 }
 
 #login{
     color: #1E1E1E;
     background-color: #FFFFFF;
-    height: 36px;
+    height: 31px;
     min-width: 124px;
     border-radius: 5px;
 }
@@ -49,7 +51,34 @@ header{
 #signup{
     color: #FFFFFF;
     background-color: #2C2C2C;
-    height: 36px;
+    height: 31px;
     min-width: 124px;
     border-radius: 5px;
+}
+
+
+#hero {
+    height: 600px;
+    padding: 100px;
+    background-image: url(small\ football\ field.png);
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.white{
+    color: #FFFFFF;
+    margin: 0;
+}
+
+#hero_tittle{
+    font-size: 5em;
+}
+
+#hero_text{
+    font-size: 2em;
 }
