@@ -3,6 +3,7 @@ body{
     padding: 0;
 }
 
+/* Header part */
 header{
     position: fixed;
     display: flex;
@@ -29,10 +30,12 @@ header{
     flex-wrap: nowrap;
 }
 
+/* Hero part*/
 #about{
     color: #1E1E1E;
     background-color: #FFFFFF;
     border-radius: 5px;
+    
 }
 .header_nav_item{
     color: #FFFFFF;
@@ -60,7 +63,7 @@ header{
 #hero {
     height: 600px;
     padding: 100px;
-    background-image: url(small\ football\ field.png);
+    background-image: url(FootballFieldBackground.png);
     background-position: center;
     background-size: cover;
     display: flex;
