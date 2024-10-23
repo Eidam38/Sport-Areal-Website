@@ -7,19 +7,18 @@ body{
 header{
     position: fixed;
     display: flex;
+    align-self: baseline;
     background-color: #1E1E1E;
     justify-content: space-between;
-    align-items: center;
-    width: 92%;
+    align-items: center;;
     gap: 20px;
     padding: 14px 64px;
     margin: 0;
 }
 
 #header_logo{
-    width: 100px;
-    height: 100px;
-    object-fit: contain;
+    width: 50px;
+    height: 50px;;
 }
 
 #header_nav{
@@ -27,20 +26,25 @@ header{
     gap: 20px;
     width: 560px;
     align-items: center;
-    flex-wrap: nowrap;
 }
 
-/* Hero part*/
-#about{
+#nav_about{
     color: #1E1E1E;
     background-color: #FFFFFF;
-    border-radius: 5px;
-    
+    border-radius: 5px;;
+
 }
+
 .header_nav_item{
     color: #FFFFFF;
     padding: 5px 20px;
     text-decoration: none;
+}
+
+#log_sign{
+    display: flex;
+    gap: 20px;
+    align-items: center;
 }
 
 #login{
@@ -59,7 +63,7 @@ header{
     border-radius: 5px;
 }
 
-
+/* Hero part*/
 #hero {
     height: 600px;
     padding: 100px;
@@ -84,4 +88,55 @@ header{
 
 #hero_text{
     font-size: 2em;
+}
+
+/* About part */
+#about{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 50px;
+    background-color: #1E1E1E;
+}
+
+#about_text_1, #about_text_2{
+    padding: 10px;
+    margin: 20px;
+    width: 30%;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    text-align: left;
+}
+
+#about_text_1{
+    margin-bottom: 50px;
+}
+#about_text_2{
+    margin-top: 100px;
+}
+
+.second_title{
+    color: #1E1E1E;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    padding: 5px 20px;
+    margin: 0;
+    width: 10%;
+    text-align: center;
+    align-self: center;
+}
+
+/* Gallery part */
+#gallery{
+    display: flex;
+    flex-direction: column;
+    background-color: #1E1E1E;
+}
+
+#gallery_img{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+    padding: 50px;
 }

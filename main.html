@@ -10,42 +10,60 @@
     <header>
         <img src="SportArealLogo.png" id="header_logo">
         <nav id=" header_nav">
-            <a href="#about" class="header_nav_item" id="about">O nás</a>
-            <a href="#galerie" class="header_nav_item">Galerie</a>
+            <a href="#about" class="header_nav_item" id="nav_about">O nás</a>
+            <a href="#gallery" class="header_nav_item">Galerie</a>
             <a href="#prices" class="header_nav_item">Ceník</a>
             <a href="#reservation" class="header_nav_item">Rezervace</a>
             <a href="#contacts" class="header_nav_item">Kontakty</a>
         </nav>
-        <nav>
-            <button id="login">Přihlásit se</button>
-            <button id="signup">Registrovat se</button>
-        </nav>
+        <ul id="log_sign">
+            <li><button id="login">Přihlásit se</button></li>
+            <li><button id="signup">Registrovat se</button></li>
+        </ul>
     </header>
     <main>
         <section id="hero">
             <h1 class="white" id="hero_tittle">Trénuj naplno, žij naplno</h1>
             <h5 class="white"id="hero_text">Sportovní areál pro každého</h5>
         </section>
+
         <section id="about">
-            <h2>O nás</h2>
-            <p>Něco</p>
-            <h2>Proč právě my?</h2>
-            <p>Něco</p>
+            <div id="about_text_1">
+                <h2>O nás</h2>
+                <p>Vítejte v našem sportovním areálu, kde se sport setkává s vášní a odhodláním! 
+                    Jsme moderní sportovní centrum, které nabízí širokou škálu sportovních aktivit pro všechny věkové kategorie a úrovně schopností. 
+                    Ať už jste začátečník hledající nové výzvy, nebo zkušený sportovec toužící po zdokonalení svých dovedností, u nás najdete to pravé.</p>
+                    <p>Naším cílem je poskytovat profesionální zázemí a vytvářet motivující prostředí, ve kterém můžete rozvíjet své schopnosti, užívat si pohyb a posouvat své limity</p>
+            </div>
+            <div id="about_text_2">
+                <h2>Proč právě my?</h2>
+                <p><b>Moderní sportoviště:</b>Od fitness centra přes multifunkční hřiště až po specializované prostory pro různé sporty.</p>
+                <p><b>Komunitní atmosféra:</b> Věříme v podporu týmového ducha a zdravé soutěžení. U nás se budete cítit jako doma.</p>    
+                <p><b>Různé aktivity:</b> Ať už jde o tenis, plavání, běh nebo zimní sporty a máme něco pro každého.</p>
+            </div>
         </section>
-        <section id="galerie">
-            <h2>Galerie</h2>
-            <!-- Fotky -->
+        
+        <section id="gallery">
+            <h2 class="second_title">Galerie</h2>
+            <div id="gallery_img">
+                <img src="gallery1.jpg" class="gallery_img">
+                <img src="gallery2.jpg" class="gallery_img">
+                <img src="gallery3.jpg" class="gallery_img">
+            </div>
         </section>
+
         <section id="price">
-            <h2>Ceník</h2>
+            <h2 class="second_title">Ceník</h2>
             <!-- Ceník -->
         </section>
+
         <section id="reservation">
-            <h2>Rezervace</h2>
+            <h2 class="second_title">Rezervace</h2>
             <!-- Rezervační kalendář -->
         </section>
+
         <section id="contacts">
-            <h2>Kontakty</h2>
+            <h2 class="second_title">Kontakty</h2>
             <p>Něco</p>
             <!-- Mapa -->
         </section>
