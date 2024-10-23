@@ -142,3 +142,35 @@ header{
     gap: 20px;
     padding: 50px;
 }
+
+/* price part */
+#price{
+    display: flex;
+    flex-direction: column;
+    background-color: #1E1E1E;
+}
+
+/* reservation part*/
+#reservation{
+    display: flex;
+    flex-direction: column;
+    background-color: #1E1E1E;
+}
+
+/* contacts part */
+#contacts{
+    display: flex;
+    flex-direction: column;
+    background-color: #1E1E1E;
+}
+
+/* Footer part */
+footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1E1E1E;
+    color: #FFFFFF;
+    height: 40px;
+    width: 100vw;
+}
