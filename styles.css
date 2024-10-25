@@ -70,7 +70,7 @@ header{
 #hero {
     height: 600px;
     padding: 100px;
-    background-image: url(FootballFieldBackground.png);
+    background-image: url(Pictures/FootballFieldBackground.png);
     background-position: center;
     background-size: cover;
     display: flex;
