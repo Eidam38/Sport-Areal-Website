@@ -1,6 +1,7 @@
 body{
     margin: 0;
     padding: 0;
+    background-color: #1E1E1E;
 }
 
 /* Header part */
@@ -122,7 +123,7 @@ header{
     background-color: #FFFFFF;
     border-radius: 5px;
     padding: 5px 20px;
-    margin: 0;
+    margin: 25px;
     width: 10%;
     text-align: center;
     align-self: center;
@@ -133,21 +134,26 @@ header{
     display: flex;
     flex-direction: column;
     background-color: #1E1E1E;
+    margin: 50px;
 }
 
-#gallery_img{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 20px;
-    padding: 50px;
+#img_gallery{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    grid-gap: 10px;
 }
 
+.gallery_img{
+    width: 100%;
+    height: 100%;
+    display: block;
+}
 /* price part */
 #price{
     display: flex;
     flex-direction: column;
     background-color: #1E1E1E;
+    margin: 50px;
 }
 
 /* reservation part*/
@@ -155,6 +161,7 @@ header{
     display: flex;
     flex-direction: column;
     background-color: #1E1E1E;
+    margin: 50px;
 }
 
 /* contacts part */
