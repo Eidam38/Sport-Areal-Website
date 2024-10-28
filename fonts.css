@@ -1,0 +1,15 @@
+/* Add this at the top of your styles.css */
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Example of applying the font to specific elements */
+h2 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+}
+
+label, input, button {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+}
