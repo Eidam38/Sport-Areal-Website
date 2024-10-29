@@ -3,8 +3,13 @@ body{
     flex-direction: column;
     margin: 0;
     padding: 0;
-    background-color: #1E1E1E;
     color: #FFFFFF;
+    background-color: #1E1E1E;
+}
+
+#login_body, #signup_body{
+    height: 100vh;
+    background: linear-gradient(100deg, #1E1E1E, #FFFFFF);
 }
 
 /* Header part */
