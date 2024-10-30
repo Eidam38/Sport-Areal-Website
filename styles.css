@@ -338,3 +338,8 @@ footer{
 #login_section ul li button:hover, #signup_section ul li button:hover {
     background-color: #3f3f3f;
 }
+
+#login_section a{
+    color: #1E1E1E;
+    text-decoration: none;
+}
