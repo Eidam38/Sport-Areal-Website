@@ -21,6 +21,7 @@ header{
     justify-content: space-between;
     align-items: center;;
     padding: 0px 10px;
+    height: 63px;
     box-sizing: border-box;
     width: 100vw;
     gap: 20px;
@@ -342,4 +343,49 @@ footer{
 #login_section a{
     color: #1E1E1E;
     text-decoration: none;
+}
+
+/* screen width 924px change header nav and header ul to menu button*/ 
+@media screen and (max-width: 924px){
+    header nav{
+        display: none;
+    }
+
+    #menu_button{
+        display: block;
+    }
+    
+    header ul{
+        display: none;
+    }
+
+    .line{
+        width: 30px;
+        height: 3px;
+        background-color: #FFFFFF;
+        margin: 5px;
+    }
+
+    #hero h1{
+        font-size: 3em;
+    }
+
+    #hero h5{
+        font-size: 1.5em;
+    }
+
+    #contacts_div{
+        flex-direction: column;
+        text-align: center;
+        width: 80%;
+    }
+
+    #contacts_info{
+        width: 100%;
+        align-self: center;
+    }
+
+    #map iframe{
+        width: 100%;
+    }
 }
