@@ -347,19 +347,49 @@ footer{
 
 /* screen width 924px change header nav and header ul to menu button*/ 
 @media screen and (max-width: 924px){
-    header nav{
+
+    #header_nav{
         display: none;
+    }
+
+    #header_nav.open{
+        display: flex;
+        position: absolute;
+        top: 63px;
+        right: 0;
+        left: 0;
+        width: 100vw;
+        transition: 0,2s;
+        flex-direction: column;
+        background-color: #1E1E1E;
+    }
+
+    header ul{
+        display: none;
+    }
+    
+    #header_buttons.open{
+        display: flex;
+        position: absolute;
+        top: 288px;
+        right: 0;
+        left: 0;
+        padding-top: 16px;
+        padding-bottom: 16px;
+        margin-top: 0;
+        margin-bottom: 0;
+        width: 100vw;
+        transition: 0,2s;
+        background-color: #1E1E1E;
+        justify-content: center;
     }
 
     #menu_button{
         display: block;
     }
     
-    header ul{
-        display: none;
-    }
 
-    .line{
+    #menu_button .line{
         width: 30px;
         height: 3px;
         background-color: #FFFFFF;
