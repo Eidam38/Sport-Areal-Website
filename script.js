@@ -1,3 +1,4 @@
+// The waitForPageLoad function ensures that the callback is executed only after the page has fully loaded.
 function waitForPageLoad(callback) {
     if (document.readyState === 'complete') {
         callback();
