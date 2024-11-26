@@ -1,10 +1,19 @@
+:root{
+    --primary-color: #FFFFFF;
+    --secondary-color: #2C2C2C;
+    --input-color: #cccaca;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 .main body{
     display: flex;
     flex-direction: column;
     margin: 0;
     padding: 0;
-    color: #FFFFFF;
-    background-color: #1E1E1E;
+    color: var(--primary-color);
+    background-color: var(--secondary-color);
+    font-family: "Poppins", 'Segoe UI',  sans-serif;
 }
 
 /* Header part */
@@ -12,7 +21,7 @@
     position: fixed;
     display: flex;
     flex-direction: row;
-    background-color: #1E1E1E;
+    background-color: var(--secondary-color);
     justify-content: space-between;
     align-items: center;;
     padding: 0px 10px;
@@ -34,14 +43,14 @@
     align-items: center;
 }
 .main #nav_about {
-    color: #1E1E1E;
-    background-color: #FFFFFF;
+    color: var(--secondary-color);
+    background-color: var(--primary-color);
     border-radius: 5px;
     white-space: nowrap; /* Prevents the element from changing size */
 }
 
 .main header nav a{
-    color: #FFFFFF;
+    color: var(--primary-color);
     padding: 5px 20px;
     text-decoration: none;
 }
@@ -55,8 +64,8 @@
 }
 
 .main #login{
-    color: #1E1E1E;
-    background-color: #FFFFFF;
+    color: var(--secondary-color);
+    background-color: var(--primary-color);
     height: 31px;
     min-width: 124px;
     border-radius: 5px;
@@ -64,8 +73,8 @@
 }
 
 .main #signup{
-    color: #FFFFFF;
-    background-color: #2C2C2C;
+    color: var(--primary-color);
+    background-color: var(--secondary-color);
     height: 31px;
     min-width: 124px;
     border-radius: 5px;
@@ -102,12 +111,12 @@
     flex-direction: row;
     justify-content: center;
     padding: 50px;
-    background-color: #1E1E1E;
+    background-color: var(--secondary-color);
 }
 
 .main h3 {
-    color: #FFFFFF;
-    background-color: #1E1E1E;
+    color: var(--primary-color);
+    background-color: var(--secondary-color);
     display: inline-block; /* Add this line to make the background width like the text */
     padding: 5px 20px;
     border-radius: 5px;
@@ -118,8 +127,8 @@
     padding: 10px;
     margin: 0px;
     width: 500px;
-    color: #1E1E1E;
-    background-color: #FFFFFF;
+    color: var(--secondary-color);
+    background-color: var(--primary-color);
     border-radius: 5px;
     text-align: left;
     box-shadow: 0 0 20px 2px rgba(255, 255, 255, 0.418);
@@ -135,9 +144,9 @@
 }
 
 .main h2 {
-    color: #1E1E1E;
-    background-color: #FFFFFF;
-    border-radius: 5px;
+    color: var(--secondary-color);
+    background-color: var(--primary-color);
+    border-radius: 10px;
     padding: 5px 20px;
     margin: 25px;
     width: auto;
@@ -149,7 +158,7 @@
 .main #gallery{
     display: flex;
     flex-direction: column;
-    background-color: #1E1E1E;
+    background-color: var(--secondary-color);
     margin: 50px;
 }
 
@@ -174,7 +183,7 @@
 .main #price {
     display: flex;
     flex-direction: column;
-    background-color: #1E1E1E;
+    background-color: var(--secondary-color);
     margin: 50px;
 }
 
@@ -194,8 +203,8 @@
     padding: 10px;
     width: 300px;
     align-self: center;
-    color: #1E1E1E;
-    background-color: #FFFFFF;
+    color: var(--secondary-color);
+    background-color: var(--primary-color);
     border-radius: 5px;
     text-align: left;
     box-shadow: 0 0 20px 2px rgba(255, 255, 255, 0.418)
@@ -220,7 +229,7 @@
 .main #reservation{
     display: flex;
     flex-direction: column;
-    background-color: #1E1E1E;
+    background-color: var(--secondary-color);
     margin: 50px;
 }
 
@@ -229,7 +238,7 @@
     display: flex;
     flex-direction: column;
     text-align: center;
-    background-color: #1E1E1E;
+    background-color: var(--secondary-color);
 }
 
 .main #contacts_div{
@@ -245,8 +254,8 @@
     flex-direction: column;
     width: 30%;
     padding: 10px;
-    color: #1E1E1E;
-    background-color: #FFFFFF;
+    color: var(--secondary-color);
+    background-color: var(--primary-color);
     border-radius: 5px;
     text-align: left;
     box-shadow: 0 0 20px 2px rgba(255, 255, 255, 0.418);
@@ -257,29 +266,30 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #1E1E1E;
-    color: #FFFFFF;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
     height: 40px;
     width: 100vw;
 }
 
 /* signup form */
-#signup_body{
+.signup body{
     margin: 0;
     padding: 0;
-    font-size: 12pt;
-    color: #FFFFFF;
+    color: var(--primary-color);
     text-align: center;
     min-height: 100vh;
     background-image: url(Pictures/SignupLoginBackground.jpg);
     background-size: cover;
     background-position: right;
     overflow: hidden;
+    font-family: "Poppins", 'Segoe UI',  sans-serif;
+    font-size: 12pt;
 }
 
-#signup_section{
+.signup section{
     box-sizing: border-box;
-    background-color: #FFFFFF;
+    background-color: var(--primary-color);
     height: 100vh;
     width: max(30%, 500px);
     padding: 10px;
@@ -290,13 +300,14 @@
     justify-content: center;
 }
 
-#signup_section h2{
+.signup section h2{
     font-size: 2rem;
     font-weight: 900;
     text-transform: uppercase;
+    color: var(--secondary-color);
 }
 
-#signup_form{
+.signup form{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -306,18 +317,18 @@
     margin-bottom: 50px;
 }
 
-#signup_form div{
+.signup form div{
     width: 100%;
     display: flex;
     justify-content: center;
 }
 
-#signup_form label{
+.signup form label{
     flex-shrink: 0;
     height: 50px;
     width: 50px;
-    background-color: #2C2C2C;
-    fill: #FFFFFF;
+    background-color: var(--secondary-color);
+    fill: var(--primary-color);
     border-radius: 10px 0 0 10px;
     display: flex;
     justify-content: center;
@@ -325,39 +336,38 @@
     font-size: 1.5rem;
 }
 
-#signup_form input{
+.signup form input{
     box-sizing: border-box;
     flex-grow: 1;
     min-width: 0;
     height: 50px;
     padding: 1em;
     border-radius: 0 10px 10px 0;
-    border: 2px solid #cccaca;
+    border: 2px solid var(--input-color);
     border-left: none;
-    background-color: #cccaca;
+    background-color: var(--input-color);
 }
 
-#signup_form input:hover{
-    border-color: #2C2C2C;
+.signup form input:hover{
+    border-color: var(--secondary-color);
 }
 
-#signup_form button{
+.signup form button{
     margin-top: 10px;
     border: none;
     border-radius: 1000px;
     padding: .85em 4em;
-    background-color: #2C2C2C;
-    color: #FFFFFF;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
     text-transform: uppercase;
     cursor: pointer;
 }
 
-#signup_form button:hover{
-    background-color: #cccaca;
-    color: #2C2C2C;
+.signup form button:hover{
+    background-color: var(--input-color)
 }
 
-#signup_section ul{
+.signup section ul{
     display: flex;
     flex-direction: row;
     gap: 10px;
@@ -366,9 +376,121 @@
     margin-top: 20px;
 }
 
-#signup_section ul li button{
-    background-color: #2C2C2C;
-    color: #FFFFFF;
+.signup section ul li button{
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    border: none;
+    border-radius: 1000px;
+    padding: .22em 1em;
+}
+
+/* login form */
+.login body{
+    margin: 0;
+    padding: 0;
+    color: var(--primary-color);
+    text-align: center;
+    min-height: 100vh;
+    background-image: url(Pictures/SignupLoginBackground.jpg);
+    background-size: cover;
+    background-position: right;
+    overflow: hidden;
+    font-family: "Poppins", 'Segoe UI',  sans-serif;
+    font-size: 12pt;
+}
+
+.login section{
+    box-sizing: border-box;
+    background-color: var(--primary-color);
+    height: 100vh;
+    width: max(30%, 500px);
+    padding: 10px;
+    border-radius: 0 20px 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.login section h2{
+    font-size: 2rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--secondary-color);
+}
+
+.login form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: min(400px, 100%);
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.login form div{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.login form label{
+    flex-shrink: 0;
+    height: 50px;
+    width: 50px;
+    background-color: var(--secondary-color);
+    fill: var(--primary-color);
+    border-radius: 10px 0 0 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+}
+
+.login form input{
+    box-sizing: border-box;
+    flex-grow: 1;
+    min-width: 0;
+    height: 50px;
+    padding: 1em;
+    border-radius: 0 10px 10px 0;
+    border: 2px solid var(--input-color);
+    border-left: none;
+    background-color: var(--input-color);
+}
+
+.login form input:hover{
+    border-color: var(--secondary-color);
+}
+
+.login form button{
+    margin-top: 10px;
+    border: none;
+    border-radius: 1000px;
+    padding: .85em 4em;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.login form button:hover{
+    background-color: var(--input-color)
+}
+
+.login section ul{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.login section ul li button{
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
     border: none;
     border-radius: 1000px;
     padding: .22em 1em;
@@ -390,7 +512,7 @@
         width: 100vw;
         transition: 0,2s;
         flex-direction: column;
-        background-color: #1E1E1E;
+        background-color: var(--secondary-color);
     }
 
     .main header ul{
@@ -409,7 +531,7 @@
         margin-bottom: 0;
         width: 100vw;
         transition: 0,2s;
-        background-color: #1E1E1E;
+        background-color: var(--secondary-color);
         justify-content: center;
     }
 
@@ -421,7 +543,7 @@
     .main #menu_button .line{
         width: 30px;
         height: 3px;
-        background-color: #FFFFFF;
+        background-color: var(--primary-color);
         margin: 5px;
     }
 
