@@ -377,11 +377,11 @@
 /* screen width 924px change header nav and header ul to menu button*/ 
 @media screen and (max-width: 924px){
 
-    #header_nav{
+    .main #header_nav{
         display: none;
     }
 
-    #header_nav.open{
+    .main #header_nav.open{
         display: flex;
         position: absolute;
         top: 63px;
@@ -393,11 +393,11 @@
         background-color: #1E1E1E;
     }
 
-    header ul{
+    .main header ul{
         display: none;
     }
     
-    #header_buttons.open{
+    .main #header_buttons.open{
         display: flex;
         position: absolute;
         top: 288px;
@@ -413,38 +413,38 @@
         justify-content: center;
     }
 
-    #menu_button{
+    .main #menu_button{
         display: block;
     }
     
 
-    #menu_button .line{
+    .main #menu_button .line{
         width: 30px;
         height: 3px;
         background-color: #FFFFFF;
         margin: 5px;
     }
 
-    #hero h1{
+    .main #hero h1{
         font-size: 3em;
     }
 
-    #hero h5{
+    .main #hero h5{
         font-size: 1.5em;
     }
 
-    #contacts_div{
+    .main #contacts_div{
         flex-direction: column;
         text-align: center;
         width: 80%;
     }
 
-    #contacts_info{
+    .main #contacts_info{
         width: 100%;
         align-self: center;
     }
 
-    #map iframe{
+    .main #map iframe{
         width: 100%;
     }
 }
