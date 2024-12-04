@@ -272,6 +272,99 @@
     width: 100vw;
 }
 
+/* screen width 924px change header nav and header ul to menu button*/ 
+@media screen and (max-width: 924px){
+
+    .main #header_nav{
+        display: none;
+    }
+
+    .main #header_nav.open{
+        display: flex;
+        position: absolute;
+        top: 63px;
+        right: 0;
+        left: 0;
+        width: 100vw;
+        transition: 0,2s;
+        flex-direction: column;
+        background-color: var(--secondary-color);
+    }
+
+    .main header ul{
+        display: none;
+    }
+    
+    .main #header_buttons.open{
+        display: flex;
+        position: absolute;
+        top: 301px;
+        right: 0;
+        left: 0;
+        padding-top: 16px;
+        padding-bottom: 16px;
+        margin-top: 0;
+        margin-bottom: 0;
+        width: 100vw;
+        transition: 0,2s;
+        background-color: var(--secondary-color);
+        justify-content: center;
+    }
+
+    .main #menu_button{
+        display: block;
+    }
+    
+
+    .main #menu_button .line{
+        width: 30px;
+        height: 3px;
+        background-color: var(--primary-color);
+        margin: 5px;
+    }
+
+    .main #hero h1{
+        font-size: 3em;
+    }
+
+    .main #hero h5{
+        font-size: 1.5em;
+    }
+
+    .main #contacts_div{
+        flex-direction: column;
+        text-align: center;
+        width: 80%;
+    }
+
+    .main #contacts_info{
+        width: 100%;
+        align-self: center;
+    }
+
+    .main #map iframe{
+        width: 100%;
+    }
+}
+/* screen width 715px change about_text_1/2, gallery */
+@media screen and (max-width: 715px){
+    .main #about{
+        flex-direction: column;
+        margin-top: 50px;
+        margin-bottom: 50px;
+        padding: 0;
+        width: 80vw;
+    }
+    
+    .main #about_text_1, .main #about_text_2{
+        margin: 0;
+        padding: 2%;
+        width: 100%;
+        margin-left: 10%;
+        margin-bottom: 25px;
+    }
+}
+
 /* signup form */
 .signup body{
     margin: 0;
@@ -494,79 +587,4 @@
     border: none;
     border-radius: 1000px;
     padding: .22em 1em;
-}
-
-/* screen width 924px change header nav and header ul to menu button*/ 
-@media screen and (max-width: 924px){
-
-    .main #header_nav{
-        display: none;
-    }
-
-    .main #header_nav.open{
-        display: flex;
-        position: absolute;
-        top: 63px;
-        right: 0;
-        left: 0;
-        width: 100vw;
-        transition: 0,2s;
-        flex-direction: column;
-        background-color: var(--secondary-color);
-    }
-
-    .main header ul{
-        display: none;
-    }
-    
-    .main #header_buttons.open{
-        display: flex;
-        position: absolute;
-        top: 288px;
-        right: 0;
-        left: 0;
-        padding-top: 16px;
-        padding-bottom: 16px;
-        margin-top: 0;
-        margin-bottom: 0;
-        width: 100vw;
-        transition: 0,2s;
-        background-color: var(--secondary-color);
-        justify-content: center;
-    }
-
-    .main #menu_button{
-        display: block;
-    }
-    
-
-    .main #menu_button .line{
-        width: 30px;
-        height: 3px;
-        background-color: var(--primary-color);
-        margin: 5px;
-    }
-
-    .main #hero h1{
-        font-size: 3em;
-    }
-
-    .main #hero h5{
-        font-size: 1.5em;
-    }
-
-    .main #contacts_div{
-        flex-direction: column;
-        text-align: center;
-        width: 80%;
-    }
-
-    .main #contacts_info{
-        width: 100%;
-        align-self: center;
-    }
-
-    .main #map iframe{
-        width: 100%;
-    }
 }
