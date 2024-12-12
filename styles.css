@@ -81,197 +81,6 @@
     border: none;
 }
 
-/* Hero part*/
-.main #hero {
-    height: 600px;
-    padding: 100px;
-    background-image: url(Pictures/FootballFieldBackground.png);
-    background-position: center;
-    background-size: cover;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-.main #hero h1{
-    font-size: 5em;
-    margin-bottom: 5px;
-}
-
-.main #hero h5{
-    font-size: 2em;
-    margin-top: 5px;
-}
-
-/* About part */
-.main #about{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    padding: 50px;
-    background-color: var(--secondary-color);
-}
-
-.main h3 {
-    color: var(--primary-color);
-    background-color: var(--secondary-color);
-    display: inline-block; /* Add this line to make the background width like the text */
-    padding: 5px 20px;
-    border-radius: 5px;
-    text-align: center;
-}
-
-.main #about_text_1, #about_text_2{
-    padding: 10px;
-    margin: 0px;
-    width: 500px;
-    color: var(--secondary-color);
-    background-color: var(--primary-color);
-    border-radius: 5px;
-    text-align: left;
-    box-shadow: 0 0 20px 2px rgba(255, 255, 255, 0.418);
-}
-
-.main #about_text_1{
-    margin-bottom: 50px;
-    margin-right: 20px;
-}
-.main #about_text_2{
-    margin-top: 100px;
-    margin-left: 20px;
-}
-
-.main h2 {
-    color: var(--secondary-color);
-    background-color: var(--primary-color);
-    border-radius: 10px;
-    padding: 5px 20px;
-    margin: 25px;
-    width: auto;
-    text-align: center;
-    align-self: center;
-}
-
-/* Gallery part */
-.main #gallery{
-    display: flex;
-    flex-direction: column;
-    background-color: var(--secondary-color);
-    margin: 50px;
-}
-
-.main #gallery div{
-    columns: 300px;
-}
-
-.main #gallery div img{
-    width: 100%;
-    margin-bottom: 1em;
-    border-radius: 5px;
-    box-shadow: 0 0 20px 2px rgba(0,0,0,0.1);
-}
-
-.main #gallery div img:hover{
-    transition: 1s;
-    transform: scale(1.1);
-    opacity: 0.8;
-}
-
-/* price part */
-.main #price {
-    display: flex;
-    flex-direction: column;
-    background-color: var(--secondary-color);
-    margin: 50px;
-}
-
-.main #price .row {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    background: none;
-    gap: 20px;
-    width: 100%;
-    box-shadow: none;
-}
-
-.main #price div {
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    width: 300px;
-    align-self: center;
-    color: var(--secondary-color);
-    background-color: var(--primary-color);
-    border-radius: 5px;
-    text-align: left;
-    box-shadow: 0 0 20px 2px rgba(255, 255, 255, 0.418)
-}
-
-.main #price h3 {
-    margin-bottom: 10px;
-    align-self: center;
-}
-
-.main #price ul {
-    list-style-type: none;
-    padding: 0;
-    align-self: center;
-}
-
-.main #price li {
-    margin: 5px 0;
-}
-
-/* reservation part*/
-.main #reservation{
-    display: flex;
-    flex-direction: column;
-    background-color: var(--secondary-color);
-    margin: 50px;
-}
-
-/* contacts part */
-.main #contacts{
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    background-color: var(--secondary-color);
-}
-
-.main #contacts_div{
-    display: flex;
-    flex-direction: row;
-    align-self: center;
-    margin: 50px;
-    gap: 20px;
-}
-
-.main #contacts_info{
-    display: flex;
-    flex-direction: column;
-    width: 30%;
-    padding: 10px;
-    color: var(--secondary-color);
-    background-color: var(--primary-color);
-    border-radius: 5px;
-    text-align: left;
-    box-shadow: 0 0 20px 2px rgba(255, 255, 255, 0.418);
-}
-
-/* Footer part */
-.main footer{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
-    height: 40px;
-    width: 100vw;
-}
-
 /* screen width 924px change header nav and header ul to menu button*/ 
 @media screen and (max-width: 924px){
 
@@ -346,7 +155,81 @@
         width: 100%;
     }
 }
-/* screen width 715px change about_text_1/2, gallery */
+
+/* Hero part*/
+.main #hero {
+    height: 600px;
+    padding: 100px;
+    background-image: url(Pictures/FootballFieldBackground.png);
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.main #hero h1{
+    font-size: 5em;
+    margin-bottom: 5px;
+}
+
+.main #hero h5{
+    font-size: 2em;
+    margin-top: 5px;
+}
+
+/* About part */
+.main #about{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 50px;
+    background-color: var(--secondary-color);
+}
+
+.main h3 {
+    color: var(--primary-color);
+    background-color: var(--secondary-color);
+    display: inline-block; /* Add this line to make the background width like the text */
+    padding: 5px 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.main #about_text_1, #about_text_2{
+    padding: 10px;
+    margin: 0px;
+    width: 500px;
+    color: var(--secondary-color);
+    background-color: var(--primary-color);
+    border-radius: 5px;
+    text-align: left;
+    box-shadow: 0 0 20px 2px rgba(255, 255, 255, 0.418);
+}
+
+.main #about_text_1{
+    margin-bottom: 50px;
+    margin-right: 20px;
+}
+.main #about_text_2{
+    margin-top: 100px;
+    margin-left: 20px;
+}
+
+.main h2 {
+    color: var(--secondary-color);
+    background-color: var(--primary-color);
+    border-radius: 10px;
+    padding: 5px 20px;
+    margin: 25px;
+    width: auto;
+    text-align: center;
+    align-self: center;
+}
+
+/* screen width 715px change about_text_1/2 */
 @media screen and (max-width: 715px){
     .main #about{
         flex-direction: column;
@@ -363,6 +246,145 @@
         margin-left: 10%;
         margin-bottom: 25px;
     }
+
+}
+
+/* Gallery part */
+.main #gallery{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--secondary-color);
+    margin: 50px;
+}
+
+.main #gallery div{
+    columns: 300px;
+}
+
+.main #gallery div img{
+    width: 100%;
+    margin-bottom: 1em;
+    border-radius: 5px;
+    box-shadow: 0 0 20px 2px rgba(0,0,0,0.1);
+}
+
+.main #gallery div img:hover{
+    transition: 1s;
+    transform: scale(1.1);
+    opacity: 0.8;
+}
+
+/* price part */
+.main #price {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--secondary-color);
+    margin: 50px;
+}
+
+.main #price .direction {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background: none;
+    gap: 20px;
+    width: 100%;
+    box-shadow: none;
+}
+
+.main #price div {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    width: 300px;
+    align-self: center;
+    color: var(--secondary-color);
+    background-color: var(--primary-color);
+    border-radius: 5px;
+    text-align: left;
+    box-shadow: 0 0 20px 2px rgba(255, 255, 255, 0.418)
+}
+
+.main #price h3 {
+    margin-bottom: 10px;
+    align-self: center;
+}
+
+.main #price ul {
+    list-style-type: none;
+    padding: 0;
+    align-self: center;
+}
+
+.main #price li {
+    margin: 5px 0;
+}
+
+/* screen width 715px change price */
+@media screen and (max-width: 715px){
+    .main #price .direction{
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+/* reservation part*/
+.main #reservation{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--secondary-color);
+    margin: 50px;
+}
+
+/* contacts part */
+.main #contacts{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background-color: var(--secondary-color);
+}
+
+.main #contacts_div{
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    margin: 50px;
+    gap: 20px;
+}
+
+.main #contacts_info{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    padding: 10px;
+    color: var(--secondary-color);
+    background-color: var(--primary-color);
+    border-radius: 5px;
+    text-align: left;
+    box-shadow: 0 0 20px 2px rgba(255, 255, 255, 0.418);
+}
+
+@media screen and (max-width: 930px){
+    .main #contacts_div{
+        flex-direction: column;
+        width: 80%;
+    }
+
+    .main #contacts_info{
+        width: 80%;
+        align-self: center;
+    }
+}
+
+/* Footer part */
+.main footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    height: 40px;
+    width: 100vw;
 }
 
 /* signup form */
