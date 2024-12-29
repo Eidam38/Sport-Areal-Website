@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $success = false;
     foreach ($users as $user) {
-        if ($user[0] === $username and $user[1] === $password) {
+        if ($user[0] === $username and password_verify($_POST['password'], $user[1])) {
             $success = true;
             break;
         }
@@ -76,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <body>
             <div id='popup'>
                 <h3>Chybně zadané údaje</h3>
-                <button onclick="location.href='signup.html'">Zkusit znovu</button>
+                <button onclick="location.href='login.html'">Zkusit znovu</button>
             </div>
         </body>
         </html>
