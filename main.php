@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="cs" class="main">
 <head>
@@ -23,8 +27,13 @@
             <div class="line"></div>
         </div>
         <ul id="header_buttons">
-            <li><a href="login.html"><button id="login">Přihlásit se</button></a></li>
-            <li><a href="signup.html"><button id="signup">Registrovat se</button></a></li>
+            <?php if(isset($_SESSION['username'])): ?>
+                    <li><a href="profile.php"><button id="login"><?php echo $_SESSION['username']?></button></a></li>
+                    <li><a href="logout.php"><button id="signup">Odhlásit se</button></a></li>
+            <?php else : ?>
+                    <li><a href="login.html"><button id="login">Přihlásit se</button></a></li>
+                    <li><a href="signup.html"><button id="signup">Registrovat se</button></a></li>
+            <?php endif; ?>
         </ul>
     </header>
     <main>
