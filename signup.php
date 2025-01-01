@@ -70,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </html>
         HTML;
     } else {
-        $users[] = [$username, $password];
+        $users[] = [$username, $password, "user"];
         $f = fopen($file, 'w');
         fwrite($f, serialize($users));
         fclose($f);

@@ -29,7 +29,7 @@
         <ul id="header_buttons">
             <?php if(isset($_SESSION['username'])): ?>
                     <li><a href="profile.php"><button id="login"><?php echo $_SESSION['username']?></button></a></li>
-                    <li><a href="logout.php"><button id="signup">Odhlásit se</button></a></li>
+                    <li><form method="post" action="logout.php"><button type="submit" id="signup">Odhlásit se</button></form></li>
             <?php else : ?>
                     <li><a href="login.php"><button id="login">Přihlásit se</button></a></li>
                     <li><a href="signup.php"><button id="signup">Registrovat se</button></a></li>
