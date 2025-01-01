@@ -683,3 +683,76 @@
     border-radius: 1000px;
     padding: .22em 1em;
 }
+
+/* profile page */
+.profile body{
+    margin: 0;
+    padding: 0;
+    color: var(--primary-color);
+    background-color: var(--secondary-color);
+    text-align: center;
+    min-height: 100vh;
+    font-family: "Poppins", 'Segoe UI',  sans-serif;
+    font-size: 12pt;
+}
+
+.profile h1{
+    color: var(--secondary-color);
+    background-color: var(--primary-color);
+    display: inline-block; /* Add this line to make the background width like the text */
+    padding: 5px 20px;
+    margin: 25px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.profile h2{
+    color: var(--primary-color);
+    background-color: var(--secondary-color);
+    display: inline-block; /* Add this line to make the background width like the text */
+    padding: 5px 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.profile #reservations{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    border-radius: 20px;
+    margin: 50px auto;
+    width: 600px;
+}
+
+.profile ul{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-left: 0;
+    align-items: center;
+    list-style-type: none;
+}
+
+.profile .reservation-item {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile .delete-btn {
+    background-color: #ff4444;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.profile .delete-btn:hover {
+    background-color: #cc0000;
+}
