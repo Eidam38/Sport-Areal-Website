@@ -31,8 +31,8 @@
                     <li><a href="profile.php"><button id="login"><?php echo $_SESSION['username']?></button></a></li>
                     <li><a href="logout.php"><button id="signup">Odhlásit se</button></a></li>
             <?php else : ?>
-                    <li><a href="login.html"><button id="login">Přihlásit se</button></a></li>
-                    <li><a href="signup.html"><button id="signup">Registrovat se</button></a></li>
+                    <li><a href="login.php"><button id="login">Přihlásit se</button></a></li>
+                    <li><a href="signup.php"><button id="signup">Registrovat se</button></a></li>
             <?php endif; ?>
         </ul>
     </header>
@@ -93,7 +93,6 @@
                         <li>Fotbalové hřiště: 250 Kč/hod</li>
                         <li>Tenisový kurt: 200 Kč/hod</li>
                         <li>Badmintonový kurt: 180 Kč/hod</li>
-                        <li>Nohejbalové hřiště: 150 Kč/hod</li>
                     </ul>
                 </div>
             </div>
@@ -101,7 +100,9 @@
 
         <section id="reservation">
             <h2>Rezervace</h2>
-            <!-- Rezervační kalendář -->
+            <div class="reservation-box">
+                <p>Pro rezervaci kurtu se prosím přihlašte</p>
+            </div>
         </section>
 
         <section id="contacts">

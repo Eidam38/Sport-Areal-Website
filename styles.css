@@ -336,6 +336,20 @@
     margin: 50px;
 }
 
+.main .reservation-box{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    width: 30%;
+    align-self: center;
+    color: var(--secondary-color);
+    background-color: var(--primary-color);
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 0 20px 2px rgba(255, 255, 255, 0.418);
+
+}
+
 /* contacts part */
 .main #contacts{
     display: flex;
