@@ -102,17 +102,45 @@
             <h2>Rezervace</h2>
             <?php if(isset($_SESSION['username'])): ?>
             <div class="reservation-box-logged">
-                <form method="post" action="reservation.php">
+                <?php
+                $allTimes = ['12:00','13:00','14:00','15:00','16:00','17:00'];
+                $reservedTimes = [];
+
+                if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['court'], $_POST['date'])) {
+                    $court = $_POST['court'];
+                    $date = $_POST['date'];
+                    if (file_exists('reservation.txt')) {
+                        $reservations = file('reservation.txt', FILE_IGNORE_NEW_LINES);
+                        foreach ($reservations as $line) {
+                            list($user, $resCourt, $resDate, $resTime) = explode('|', $line);
+                            if ($resCourt === $court && $resDate === $date) {
+                                $reservedTimes[] = $resTime;
+                            }
+                        }
+                    }
+                }
+                ?>
+                <form method="post" action="">
                     <select name="court" id="court">
-                        <option value="football">Fotbalové hřiště</option>
-                        <option value="tennis">Tennisový kurt</option>
-                        <option value="badminton">Badmintonový kurt</option>
+                        <option value="football" <?php if (isset($court) && $court == 'football') echo 'selected'; ?>>Fotbalové hřiště</option>
+                        <option value="tennis" <?php if (isset($court) && $court == 'tennis') echo 'selected'; ?>>Tennisový kurt</option>
+                        <option value="badminton" <?php if (isset($court) && $court == 'badminton') echo 'selected'; ?>>Badmintonový kurt</option>
                     </select>
                     <label for="date">Datum:</label>
-                    <input type="date" name="date" id="date">
-                    </select>
-                    <button type="submit">Rezervovat</button>
+                    <input type="date" name="date" id="date" value="<?php echo isset($date) ? $date : ''; ?>">
+                    <button type="submit">Podívat se</button>
                 </form>
+                <?php
+                if (!empty($court) && !empty($date)) {
+                    foreach ($allTimes as $time) {
+                        if (in_array($time, $reservedTimes)) {
+                            echo "<p>$time: Obsazeno</p>";
+                        } else {
+                            echo "<p>$time: <a href='reservation.php?court=$court&date=$date&time=$time'>Reservovat</a></p>";
+                        }
+                    }
+                }
+                ?>
             <?php else : ?>
             <div class="reservation-box">
                 <p>Pro rezervaci kurtu se prosím přihlašte</p>

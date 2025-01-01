@@ -380,6 +380,35 @@
     background-color: var(--input-color);
 }
 
+.main .reservation-box-logged button{
+    margin: 10px 0;
+    border: none;
+    border-radius: 1000px;
+    padding: .85em 4em;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.main .reservation-box-logged p{
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    padding: 5px;
+    border-radius: 5px;
+    width: 200px;
+    align-self: center;
+}
+
+.main .reservation-box-logged p a{
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.main .reservation-box-logged p a:hover{
+    text-decoration: underline;
+}
+
 /* contacts part */
 .main #contacts{
     display: flex;

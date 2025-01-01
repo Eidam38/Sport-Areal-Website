@@ -1,21 +1,16 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = htmlspecialchars($_POST['email']);
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $password = $_POST['password'];
+
 
     $file = 'users.txt';
-    if (file_exists($file)) {
-        $f = fopen($file, 'r');
-        $users = fread($f, filesize($file));
-        fclose($f);
-        $users = $users ? unserialize($users) : [];
-    } else {
-        $users = [];
-    }
+    $users = file_exists($file) ? file($file, FILE_IGNORE_NEW_LINES) : [];
 
     $success = false;
-    foreach ($users as $user) {
-        if ($user[0] === $username and password_verify($_POST['password'], $user[1])) {
+    foreach ($users as $line) {
+        list($existingEmail, $hashedPassword, $role) = explode('|', $line);
+        if ($existingEmail === $username && password_verify($password, $hashedPassword)) {
             $success = true;
             break;
         }
@@ -50,8 +45,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     border-radius: 25px;
                     padding: 50px;
                     text-align: center;
+                    color: var(--secondary-color);
                     background-color: #fff;
                 }
+
                 button{
                     background-color: var(--secondary-color);
                     color: var(--primary-color);
@@ -65,7 +62,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </head>
         <body>
             <div id='popup'>
-                <h3>Byli jste úspěšně přihlášen!</h3>
+                <h3>Přihlášení úspěšné!</h3>
                 <button onclick="location.href='main.php'">Přejít na hlavní stránku</button>
             </div>
         </body>
@@ -75,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo <<<HTML
         <html>
         <head>
-            <title>Přihlášení neuspěšné</title>
+            <title>Přihlášení neúspěšné</title>
             <style>
                 :root{
                     --primary-color: #FFFFFF;
@@ -98,6 +95,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     border-radius: 25px;
                     padding: 50px;
                     text-align: center;
+                    color: var(--secondary-color);
                     background-color: #fff;
                 }
                 button{
@@ -113,7 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </head>
         <body>
             <div id='popup'>
-                <h3>Chybně zadané údaje</h3>
+                <h3>Neplatné přihlašovací údaje</h3>
                 <button onclick="location.href='login.php'">Zkusit znovu</button>
             </div>
         </body>

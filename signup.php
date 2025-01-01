@@ -4,20 +4,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
     $file = 'users.txt';
-    if (file_exists($file)) {
-        $f = fopen($file, 'r');
-        $users = fread($f, filesize($file));
-        fclose($f);
-        $users = $users ? unserialize($users) : [];
-    } else {
-        $users = [];
-    }
-
     $emailExists = false;
-    foreach ($users as $user) {
-        if ($user[0] === $username) {
-            $emailExists = true;
-            break;
+    if (file_exists($file)) {
+        $users = file($file, FILE_IGNORE_NEW_LINES);
+        foreach ($users as $line) {
+            list($existingEmail) = explode('|', $line);
+            if ($existingEmail === $username) {
+                $emailExists = true;
+                break;
+            }
         }
     }
 
@@ -48,6 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     border-radius: 25px;
                     padding: 50px;
                     text-align: center;
+                    color: var(--secondary-color);
                     background-color: #fff;
                 }
                 button{
@@ -70,10 +66,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </html>
         HTML;
     } else {
-        $users[] = [$username, $password, "user"];
-        $f = fopen($file, 'w');
-        fwrite($f, serialize($users));
-        fclose($f);
+        $userLine = $username . '|' . $password . '|user' . PHP_EOL;
+        file_put_contents($file, $userLine, FILE_APPEND);
         session_start();
         $_SESSION['username'] = $username;
         echo <<<HTML
@@ -102,6 +96,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     border-radius: 25px;
                     padding: 50px;
                     text-align: center;
+                    color: var(--secondary-color);
                     background-color: #fff;
                 }
                 button{
