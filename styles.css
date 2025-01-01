@@ -729,7 +729,6 @@
 .profile ul{
     display: flex;
     flex-direction: column;
-    gap: 20px;
     padding-left: 0;
     align-items: center;
     list-style-type: none;
@@ -749,10 +748,21 @@
     color: white;
     border: none;
     padding: 5px 10px;
+    margin: 5px;
     cursor: pointer;
     border-radius: 3px;
 }
 
 .profile .delete-btn:hover {
     background-color: #cc0000;
+}
+
+.profile button{
+    color: var(--secondary-color);
+    background-color: var(--primary-color);
+    height: 31px;
+    min-width: 124px;
+    border-radius: 5px;
+    border: none;
+    font: 1em sans-serif;
 }

@@ -112,7 +112,11 @@
                     if (file_exists('reservation.txt')) {
                         $reservations = file('reservation.txt', FILE_IGNORE_NEW_LINES);
                         foreach ($reservations as $line) {
-                            list($user, $resCourt, $resDate, $resTime) = explode('|', $line);
+                            if (empty($line)) continue;
+                            $parts = explode('|', $line);
+                            if (count($parts) !== 4) continue;
+                            
+                            list($user, $resCourt, $resDate, $resTime) = $parts;
                             if ($resCourt === $court && $resDate === $date) {
                                 $reservedTimes[] = $resTime;
                             }
