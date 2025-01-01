@@ -347,7 +347,37 @@
     border-radius: 5px;
     text-align: center;
     box-shadow: 0 0 20px 2px rgba(255, 255, 255, 0.418);
+}
 
+.main .reservation-box-logged{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    width: 30%;
+    align-self: center;
+    color: var(--secondary-color);
+    background-color: var(--primary-color);
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 0 20px 2px rgba(255, 255, 255, 0.418);
+}
+
+.main .reservation-box-logged select{
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 2px solid var(--input-color);
+    background-color: var(--input-color);
+}
+
+.main .reservation-box-logged input{
+    width: 70%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 2px solid var(--input-color);
+    background-color: var(--input-color);
 }
 
 /* contacts part */

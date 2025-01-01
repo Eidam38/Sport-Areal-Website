@@ -100,9 +100,24 @@
 
         <section id="reservation">
             <h2>Rezervace</h2>
+            <?php if(isset($_SESSION['username'])): ?>
+            <div class="reservation-box-logged">
+                <form method="post" action="reservation.php">
+                    <select name="court" id="court">
+                        <option value="football">Fotbalové hřiště</option>
+                        <option value="tennis">Tennisový kurt</option>
+                        <option value="badminton">Badmintonový kurt</option>
+                    </select>
+                    <label for="date">Datum:</label>
+                    <input type="date" name="date" id="date">
+                    </select>
+                    <button type="submit">Rezervovat</button>
+                </form>
+            <?php else : ?>
             <div class="reservation-box">
                 <p>Pro rezervaci kurtu se prosím přihlašte</p>
             </div>
+            <?php endif; ?>
         </section>
 
         <section id="contacts">
