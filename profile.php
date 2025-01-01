@@ -7,6 +7,7 @@ if (!isset($_SESSION['username'])) {
 }
 
 $username = $_SESSION['username'];
+$role = $_SESSION['role'];
 $userPhoto = "images/default-profile.jpg";
 $reservations = [];
 
@@ -19,7 +20,7 @@ if (file_exists('reservation.txt')) {
 
         list($user, $court, $date, $time) = $parts;
             
-        if ($user === $username) {
+        if ($user === $username or $role === 'admin') {
             $reservations[] = [
                 'court' => htmlspecialchars($court),
                 'date' => htmlspecialchars($date),

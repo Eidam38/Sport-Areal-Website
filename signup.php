@@ -70,6 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         file_put_contents($file, $userLine, FILE_APPEND);
         session_start();
         $_SESSION['username'] = $username;
+        $_SESSION['role'] = 'user';
         echo <<<HTML
         <html>
         <head>

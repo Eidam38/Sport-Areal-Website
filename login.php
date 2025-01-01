@@ -19,6 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($success) {
         session_start();
         $_SESSION['username'] = $username;
+        $_SESSION['role'] = $role;
         echo <<<HTML
         <html>
         <head>
