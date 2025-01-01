@@ -16,3 +16,17 @@ waitForPageLoad(function() {
         header_buttons.classList.toggle('open');
     });
 });
+
+function validatePasswords() {
+    var password = document.getElementById("password").value;
+    var secondpassword = document.getElementById("secondpassword").value;
+    var errorMessage = document.getElementById("error-message");
+
+    if (password !== secondpassword) {
+        errorMessage.textContent = "Hesla se neshodují!";
+        errorMessage.style.display = "block";
+        return false;
+    }
+    errorMessage.style.display = "none";
+    return true;
+}
