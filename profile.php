@@ -21,24 +21,20 @@ $role = $_SESSION['role'];
 $userPhoto = "images/default-profile.jpg";
 $reservations = [];
 
-if (file_exists(__DIR__ . '/Data/reservations.txt')) {
-    $allReservations = file(__DIR__ . '/Data/reservations.txt', FILE_IGNORE_NEW_LINES);
-    foreach ($allReservations as $line) {
-        if (empty(trim($line))) continue;
-        
-        $parts = explode('|', $line);
+$allReservations = file_exists(__DIR__ . '/Data/reservations.txt') ? file(__DIR__ . '/Data/reservations.txt', FILE_IGNORE_NEW_LINES) : [];
+foreach ($allReservations as $line) {
+    if (empty(trim($line))) continue;
 
-        list($user, $court, $date, $time) = $parts;
-            
-        if ($user === $username or $role === 'admin') {
-            $reservations[] = [
-                'court' => htmlspecialchars($court),
-                'date' => htmlspecialchars($date),
-                'time' => htmlspecialchars($time),
-                'fullLine' => htmlspecialchars($line)
-            ];
-        }        
-    }
+    list($user, $court, $date, $time) = explode('|', $line);
+        
+    if ($user === $username or $role === 'admin') {
+        $reservations[] = [
+            'court' => htmlspecialchars($court),
+            'date' => htmlspecialchars($date),
+            'time' => htmlspecialchars($time),
+            'fullLine' => htmlspecialchars($line)
+        ];
+    }        
 }
 ?>
 

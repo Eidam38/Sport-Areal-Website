@@ -109,17 +109,13 @@
                 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['court'], $_POST['date'])) {
                     $court = $_POST['court'];
                     $date = $_POST['date'];
-                    if (file_exists(__DIR__ . '/Data/reservations.txt')) {
-                        $reservations = file(__DIR__ . '/Data/reservations.txt', FILE_IGNORE_NEW_LINES);
-                        foreach ($reservations as $line) {
-                            if (empty($line)) continue;
-                            $parts = explode('|', $line);
-                            if (count($parts) !== 4) continue;
-                            
-                            list($user, $resCourt, $resDate, $resTime) = $parts;
-                            if ($resCourt === $court && $resDate === $date) {
-                                $reservedTimes[] = $resTime;
-                            }
+                    $file = __DIR__ . '/Data/reservations.txt';
+                    $reservations = file_exists($file) ? file($file, FILE_IGNORE_NEW_LINES) : [];
+                    foreach ($reservations as $line) {
+                        if (empty($line)) continue;
+                        list($user, $resCourt, $resDate, $resTime) = explode('|', $line);;
+                        if ($resCourt === $court && $resDate === $date) {
+                            $reservedTimes[] = $resTime;
                         }
                     }
                 }

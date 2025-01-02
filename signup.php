@@ -4,15 +4,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
     $file = __DIR__ . '/Data/users.txt';
+    $users = file_exists($file) ? file($file, FILE_IGNORE_NEW_LINES) : [];
+    
     $emailExists = false;
-    if (file_exists($file)) {
-        $users = file($file, FILE_IGNORE_NEW_LINES);
-        foreach ($users as $line) {
-            list($existingEmail) = explode('|', $line);
-            if ($existingEmail === $username) {
-                $emailExists = true;
-                break;
-            }
+    foreach ($users as $line) {
+        list($existingEmail) = explode('|', $line);
+        if ($existingEmail === $username) {
+            $emailExists = true;
+            break;
         }
     }
 
