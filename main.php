@@ -109,8 +109,8 @@
                 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['court'], $_POST['date'])) {
                     $court = $_POST['court'];
                     $date = $_POST['date'];
-                    if (file_exists('reservation.txt')) {
-                        $reservations = file('reservation.txt', FILE_IGNORE_NEW_LINES);
+                    if (file_exists('/data/reservations.txt')) {
+                        $reservations = file('/data/reservations.txt', FILE_IGNORE_NEW_LINES);
                         foreach ($reservations as $line) {
                             if (empty($line)) continue;
                             $parts = explode('|', $line);
