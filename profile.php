@@ -1,6 +1,9 @@
 <?php
 session_start();
 
+$username = $_SESSION['username'];
+$role = $_SESSION['role'];
+
 $now = new DateTime();
 $allReservations = file_exists(__DIR__ . '/Data/reservations.txt') ? file(__DIR__ . '/Data/reservations.txt', FILE_IGNORE_NEW_LINES) : [];
 $futureReservations = [];
@@ -16,12 +19,20 @@ foreach ($allReservations as $line) {
 
 file_put_contents(__DIR__ . '/Data/reservations.txt', implode("\n", $futureReservations) . "\n");
 
-$username = $_SESSION['username'];
-$role = $_SESSION['role'];
-$userPhoto = "images/default-profile.jpg";
-$reservations = [];
+$userPhoto = "Pictures/default-profile.jpg";
 
+if (file_exists(__DIR__ . "/Data/uploads/{$username}.jpg")) {
+    $userPhoto = "Data/uploads/{$username}.jpg";
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['profile_picture'])) {
+    $targetPath = __DIR__ . "/Data/uploads/{$username}.jpg";
+    move_uploaded_file($_FILES['profile_picture']['tmp_name'], $targetPath);
+}
+
+$reservations = [];
 $allReservations = file_exists(__DIR__ . '/Data/reservations.txt') ? file(__DIR__ . '/Data/reservations.txt', FILE_IGNORE_NEW_LINES) : [];
+
 foreach ($allReservations as $line) {
     if (empty(trim($line))) continue;
 
@@ -52,7 +63,11 @@ foreach ($allReservations as $line) {
     </header>
     <main>
         <section id="user_photo">
-            <img src="<?php echo $userPhoto; ?>" alt="Profilová fotka" id="profile_photo">
+            <img src="<?php echo $userPhoto; ?>" alt="Profilová fotka" width="200" height="200">
+            <form action="" method="POST" enctype="multipart/form-data">
+                <input type="file" name="profile_picture" accept="image/*">
+                <button type="submit">Nahrát novou fotku</button>
+            </form>
         </section>
         <section id="reservations">
             <h2>Vaše rezervace:</h2>
