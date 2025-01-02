@@ -1,46 +1,34 @@
-# Sport-Areal-Website
+# Sport Areal Reservation System
 
-## Introduction
-
-Welcome to the Sport-Areal-Website project! This project aims to create a comprehensive website for a sports facility that includes user authentication, profile management, and court reservation functionalities.
+Welcome to the Sport Areal Reservation System! This project is a web-based application that allows users to register, log in, and make reservations for various sports facilities.
 
 ## Features
 
-- **User Authentication**: Users can sign up, log in, and log out securely.
-- **Profile Management**: Users can upload and update their profile pictures.
-- **Court Reservation**: Users can view available times and make reservations for different sports courts.
-- **Admin Privileges**: Admin users can manage reservations and have additional privileges.
+- **User Registration and Login**: Users can create an account and log in to access the reservation system.
+- **Profile Management**: Users can upload a profile picture and view their reservations.
+- **Reservation System**: Users can view available times for different courts and make reservations.
+- **Admin Features**: Admin users can view and manage all reservations.
 
 ## Project Structure
+. ├── .gitignore ├── Data/ │ ├── reservations.txt │ ├── uploads/ │ └── users.txt ├── delete_reservation.php ├── login.php ├── logout.php ├── main.php ├── Pictures/ ├── profile.php ├── README.md ├── reservation.php ├── script.js ├── signup.php └── styles.css
 
-- **Data/**: Contains user and reservation data.
-- **Pictures/**: Contains images used on the website.
-- **delete_reservation.php**: Handles reservation deletion.
-- **login.php**: Handles user login.
-- **logout.php**: Handles user logout.
-- **main.php**: Main page of the website.
-- **profile.php**: User profile page.
-- **reservation.php**: Handles court reservations.
-- **script.js**: Contains JavaScript functions for the website.
-- **signup.php**: Handles user registration.
-- **styles.css**: Contains the CSS styles for the website.
+## Installation
 
-## Getting Started
-
-1. **Clone the repository**:
+1. Clone the repository:
     ```sh
-    git clone <repository-url>
+    git clone https://github.com/yourusername/sport-areal-reservation.git
     ```
-
-2. **Navigate to the project directory**:
+2. Navigate to the project directory:
     ```sh
-    cd Sport-Areal-Website
+    cd sport-areal-reservation
     ```
+3. Ensure you have a web server (like Apache) and PHP installed.
+4. Place the project directory in your web server's root directory.
+5. Access the application via your web browser.
 
-3. **Run the project**:
-    - Ensure you have a local server setup (e.g., XAMPP, WAMP).
-    - Place the project in the server's root directory (e.g., `htdocs` for XAMPP).
-    - Start the server and navigate to `http://localhost/Sport-Areal-Website` in your browser.
+## Usage
 
-
-Thank you for your interest in the Sport-Areal-Website project!
+1. Open the application in your web browser.
+2. Register a new account or log in with an existing account.
+3. Navigate to the reservation section to view available times and make reservations.
+4. Admin users can log in to manage all reservations.
