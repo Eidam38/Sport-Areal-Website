@@ -6,7 +6,6 @@
     $court = null;
     $date = null;
 
-    // Handle POST request
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['court'], $_POST['date'])) {
         $court = $_POST['court'];
         $date = $_POST['date'];
@@ -14,7 +13,6 @@
         exit;
     }
 
-    // Process GET parameters
     if (isset($_GET['court']) && isset($_GET['date'])) {
         $court = $_GET['court'];
         $date = $_GET['date'];
