@@ -1,6 +1,21 @@
 <?php
 session_start();
 
+$now = new DateTime();
+$allReservations = file_exists(__DIR__ . '/Data/reservations.txt') ? file(__DIR__ . '/Data/reservations.txt', FILE_IGNORE_NEW_LINES) : [];
+$futureReservations = [];
+
+foreach ($allReservations as $line) {
+    if (empty(trim($line))) continue;
+    list($user, $court, $date, $time) = explode('|', $line);
+    $resDateTime = new DateTime("$date $time");
+    if ($resDateTime >= $now) {
+        $futureReservations[] = $line;
+    }
+}
+
+file_put_contents(__DIR__ . '/Data/reservations.txt', implode("\n", $futureReservations) . "\n");
+
 $username = $_SESSION['username'];
 $role = $_SESSION['role'];
 $userPhoto = "images/default-profile.jpg";
