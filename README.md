@@ -9,9 +9,6 @@ Welcome to the Sport Areal Reservation System! This project is a web-based appli
 - **Reservation System**: Users can view available times for different courts and make reservations.
 - **Admin Features**: Admin users can view and manage all reservations.
 
-## Project Structure
-. ├── .gitignore ├── Data/ │ ├── reservations.txt │ ├── uploads/ │ └── users.txt ├── delete_reservation.php ├── login.php ├── logout.php ├── main.php ├── Pictures/ ├── profile.php ├── README.md ├── reservation.php ├── script.js ├── signup.php └── styles.css
-
 ## Installation
 
 1. Clone the repository:
