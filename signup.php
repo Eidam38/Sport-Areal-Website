@@ -3,7 +3,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = htmlspecialchars($_POST['email']);
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-    $file = '/data/users.txt';
+    $file = __DIR__ . '/Data/users.txt';
     $emailExists = false;
     if (file_exists($file)) {
         $users = file($file, FILE_IGNORE_NEW_LINES);

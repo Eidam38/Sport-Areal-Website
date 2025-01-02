@@ -6,8 +6,8 @@ $role = $_SESSION['role'];
 $userPhoto = "images/default-profile.jpg";
 $reservations = [];
 
-if (file_exists('/data/reservations.txt')) {
-    $allReservations = file('/data/reservations.txt', FILE_IGNORE_NEW_LINES);
+if (file_exists(__DIR__ . '/Data/reservations.txt')) {
+    $allReservations = file(__DIR__ . '/Data/reservations.txt', FILE_IGNORE_NEW_LINES);
     foreach ($allReservations as $line) {
         if (empty(trim($line))) continue;
         
