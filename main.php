@@ -136,8 +136,14 @@
                 </form>
                 <?php
                 if (!empty($court) && !empty($date)) {
+                    $now = new DateTime();
                     foreach ($allTimes as $time) {
-                        if (in_array($time, $reservedTimes)) {
+                        $dateTimeStr = $date . ' ' . $time . ':00';
+                        $selectedDateTime = new DateTime($dateTimeStr);
+
+                        if ($selectedDateTime < $now) {
+                            echo "<p>$time: Nedostupné</p>";
+                        } elseif (in_array($time, $reservedTimes)) {
                             echo "<p>$time: Obsazeno</p>";
                         } else {
                             echo "<p>$time: <a href='reservation.php?court=$court&date=$date&time=$time'>Reservovat</a></p>";
