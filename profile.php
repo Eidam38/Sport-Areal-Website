@@ -19,15 +19,27 @@ foreach ($allReservations as $line) {
 
 file_put_contents(__DIR__ . '/Data/reservations.txt', implode("\n", $futureReservations) . "\n");
 
-$userPhoto = "Pictures/default-profile.jpg";
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['profile_picture'])) {
+    $targetPath = __DIR__ . "/Data/uploads/{$username}.jpg";
+    if (move_uploaded_file($_FILES['profile_picture']['tmp_name'], $targetPath)) {
+        header("Location: profile.php?status=success");
+    } else {
+        header("Location: profile.php?status=error");
+    }
+    exit;
+}
 
+$userPhoto = "Pictures/default-profile.jpg";
 if (file_exists(__DIR__ . "/Data/uploads/{$username}.jpg")) {
     $userPhoto = "Data/uploads/{$username}.jpg";
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['profile_picture'])) {
-    $targetPath = __DIR__ . "/Data/uploads/{$username}.jpg";
-    move_uploaded_file($_FILES['profile_picture']['tmp_name'], $targetPath);
+if (isset($_GET['status'])) {
+    if ($_GET['status'] === 'success') {
+        echo '<div class="alert success">Profilový obrázek byl úspěšně nahrán.</div>';
+    } elseif ($_GET['status'] === 'error') {
+        echo '<div class="alert error">Chyba při nahrávání obrázku.</div>';
+    }
 }
 
 $reservations = [];

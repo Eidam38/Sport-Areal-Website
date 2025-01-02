@@ -1,8 +1,7 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = htmlspecialchars($_POST['email']);
+    $username = $_POST['email'];
     $password = $_POST['password'];
-
 
     $file = __DIR__ . '/Data/users.txt';
     $users = file_exists($file) ? file($file, FILE_IGNORE_NEW_LINES) : [];
@@ -12,56 +11,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         list($existingEmail, $hashedPassword, $role) = explode('|', $line);
         if ($existingEmail === $username && password_verify($password, $hashedPassword)) {
             $success = true;
+            session_start();
+            $_SESSION['username'] = $username;
+            $_SESSION['role'] = $role;
             break;
         }
     }
 
     if ($success) {
-        session_start();
-        $_SESSION['username'] = $username;
-        $_SESSION['role'] = $role;
+        header("Location: login.php?status=success");
+        exit;
+    } else {
+        header("Location: login.php?status=error");
+        exit;
+    }
+} else {
+    if (isset($_GET['status']) && ($_GET['status'] === 'success' )) {
         echo <<<HTML
         <html>
-        <head>
-            <title>Přihlášení úspěšné</title>
-            <style>
-                :root{
-                    --primary-color: #FFFFFF;
-                    --input-color: #cccaca;
-                    --secondary-color: #2C2C2C;
-                    }
-                @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-                body{
-                    margin: 0;
-                    padding: 0;
-                    font-family: 'Poppins', sans-serif;
-                    background-color: var(--primary-color);
-                }
-                #popup {
-                    position: fixed;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    border: 5px solid var(--secondary-color);
-                    border-radius: 25px;
-                    padding: 50px;
-                    text-align: center;
-                    color: var(--secondary-color);
-                    background-color: #fff;
-                }
-
-                button{
-                    background-color: var(--secondary-color);
-                    color: var(--primary-color);
-                    padding: 10px 20px;
-                    border: none;
-                    border-radius: 5px;
-                    cursor: pointer;
-                    margin-top: 10px;
-                }
-            </style>
-        </head>
-        <body>
+        <head><title>Přihlášení úspěšné</title></head>
+        <body class="login">
             <div id='popup'>
                 <h3>Přihlášení úspěšné!</h3>
                 <button onclick="location.href='main.php'">Přejít na hlavní stránku</button>
@@ -69,48 +38,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </body>
         </html>
         HTML;
-    } else {
+    } elseif (isset($_GET['status']) && $_GET['status'] === 'error') {
         echo <<<HTML
         <html>
-        <head>
-            <title>Přihlášení neúspěšné</title>
-            <style>
-                :root{
-                    --primary-color: #FFFFFF;
-                    --input-color: #cccaca;
-                    --secondary-color: #2C2C2C;
-                    }
-                @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-                body{
-                    margin: 0;
-                    padding: 0;
-                    font-family: 'Poppins', sans-serif;
-                    background-color: var(--primary-color);
-                }
-                #popup {
-                    position: fixed;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    border: 5px solid var(--secondary-color);
-                    border-radius: 25px;
-                    padding: 50px;
-                    text-align: center;
-                    color: var(--secondary-color);
-                    background-color: #fff;
-                }
-                button{
-                    background-color: var(--secondary-color);
-                    color: var(--primary-color);
-                    padding: 10px 20px;
-                    border: none;
-                    border-radius: 5px;
-                    cursor: pointer;
-                    margin-top: 10px;
-                }
-            </style>
-        </head>
-        <body>
+        <head><title>Přihlášení neúspěšné</title></head>
+        <body class="login">
             <div id='popup'>
                 <h3>Neplatné přihlašovací údaje</h3>
                 <button onclick="location.href='login.php'">Zkusit znovu</button>

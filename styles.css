@@ -572,6 +572,29 @@
     padding: .22em 1em;
 }
 
+.signup #popup{
+    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    border: 5px solid var(--secondary-color);
+                    border-radius: 25px;
+                    padding: 50px;
+                    text-align: center;
+                    color: var(--secondary-color);
+                    background-color: #fff;
+}
+
+.signup #popup button{
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
 /* login form */
 .login body{
     margin: 0;
@@ -682,6 +705,29 @@
     border: none;
     border-radius: 1000px;
     padding: .22em 1em;
+}
+
+.login #popup{
+    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    border: 5px solid var(--secondary-color);
+                    border-radius: 25px;
+                    padding: 50px;
+                    text-align: center;
+                    color: var(--secondary-color);
+                    background-color: #fff;
+}
+
+.login #popup button{
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
 }
 
 /* profile page */
