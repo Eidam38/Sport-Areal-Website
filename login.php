@@ -84,7 +84,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <li><a href="main.php"><button type="submit">Zpět</button></a></li>
             <li><a href="signup.php"><button type="submit">Registrovat se</button></a></li>
         </ul>
-        <a href="reset.html">Zapomenuté heslo</a>
     </Section>
 </body>
 </html>
