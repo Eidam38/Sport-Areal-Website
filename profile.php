@@ -5,7 +5,7 @@ $username = $_SESSION['username'];
 $role = $_SESSION['role'];
 
 $now = new DateTime();
-$allReservations = file_exists(__DIR__ . '/Data/reservations.txt') ? file(__DIR__ . '/Data/reservations.txt', FILE_IGNORE_NEW_LINES) : [];
+$allReservations = file_exists('Data/reservations.txt') ? file('Data/reservations.txt', FILE_IGNORE_NEW_LINES) : [];
 $futureReservations = [];
 
 foreach ($allReservations as $line) {
@@ -17,10 +17,10 @@ foreach ($allReservations as $line) {
     }
 }
 
-file_put_contents(__DIR__ . '/Data/reservations.txt', implode("\n", $futureReservations) . "\n");
+file_put_contents('Data/reservations.txt', implode("\n", $futureReservations) . "\n");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['profile_picture'])) {
-    $targetPath = __DIR__ . "/Data/uploads/{$username}.jpg";
+    $targetPath = "Data/uploads/{$username}.jpg";
     if (move_uploaded_file($_FILES['profile_picture']['tmp_name'], $targetPath)) {
         header("Location: profile.php?status=success");
     } else {
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['profile_picture'])) 
 }
 
 $userPhoto = "Pictures/default-profile.jpg";
-if (file_exists(__DIR__ . "/Data/uploads/{$username}.jpg")) {
+if (file_exists("Data/uploads/{$username}.jpg")) {
     $userPhoto = "Data/uploads/{$username}.jpg";
 }
 
@@ -43,7 +43,7 @@ if (isset($_GET['status'])) {
 }
 
 $reservations = [];
-$allReservations = file_exists(__DIR__ . '/Data/reservations.txt') ? file(__DIR__ . '/Data/reservations.txt', FILE_IGNORE_NEW_LINES) : [];
+$allReservations = file_exists('Data/reservations.txt') ? file('Data/reservations.txt', FILE_IGNORE_NEW_LINES) : [];
 
 foreach ($allReservations as $line) {
     if (empty(trim($line))) continue;

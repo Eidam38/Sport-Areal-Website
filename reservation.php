@@ -8,7 +8,7 @@ if (isset($_GET['court'], $_GET['date'], $_GET['time']) && isset($_SESSION['user
     $time = $_GET['time'];
 
     $reservationLine = $username . '|' . $court . '|' . $date . '|' . $time . PHP_EOL;
-    file_put_contents(__DIR__ . '/Data/reservations.txt', $reservationLine, FILE_APPEND);
+    file_put_contents('Data/reservations.txt', $reservationLine, FILE_APPEND);
 
     header('Location: main.php?reservation=success');
     exit;

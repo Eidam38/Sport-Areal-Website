@@ -16,7 +16,7 @@
     if (isset($_GET['court']) && isset($_GET['date'])) {
         $court = $_GET['court'];
         $date = $_GET['date'];
-        $file = __DIR__ . '/Data/reservations.txt';
+        $file = 'Data/reservations.txt';
         $reservations = file_exists($file) ? file($file, FILE_IGNORE_NEW_LINES) : [];
         foreach ($reservations as $line) {
             if (empty($line)) continue;

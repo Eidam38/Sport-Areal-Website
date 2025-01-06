@@ -3,7 +3,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['email'];
     $password = $_POST['password'];
 
-    $file = __DIR__ . '/Data/users.txt';
+    $file ='Data/users.txt';
     $users = file_exists($file) ? file($file, FILE_IGNORE_NEW_LINES) : [];
 
     $success = false;
