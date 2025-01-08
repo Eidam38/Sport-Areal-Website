@@ -17,13 +17,40 @@ waitForPageLoad(function() {
     });
 });
 
+function checkEmail(value) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "login.php", true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var emailField = document.getElementById("email");
+            if (xhr.responseText === "invalid") {
+                emailField.style.borderColor = "red";
+            } else {
+                emailField.style.borderColor = "";
+            }
+        }
+    };
+    xhr.send("email=" + encodeURIComponent(value));
+}
+
 function validatePasswords() {
-    var password = document.getElementById("password").value;
-    var secondpassword = document.getElementById("secondpassword").value;
+    var passwordField = document.getElementById("password");
+    var secondPasswordField = document.getElementById("secondpassword");
+    var password = passwordField.value;
+    var secondpassword = secondPasswordField.value;
     var errorMessage = document.getElementById("error-message");
 
     if (password !== secondpassword) {
+        passwordField.style.borderColor = "red";
+        secondPasswordField.style.borderColor = "red";
         errorMessage.textContent = "Hesla se neshodují!";
+        errorMessage.style.display = "block";
+        return false;
+    } else if (password.length < 8) {
+        passwordField.style.borderColor = "red";
+        secondPasswordField.style.borderColor = "red";
+        errorMessage.textContent = "Hesla musí být minimálně 8 znaků!";
         errorMessage.style.display = "block";
         return false;
     }

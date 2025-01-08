@@ -59,6 +59,13 @@ foreach ($allReservations as $line) {
         ];
     }        
 }
+
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$perPage = 10;
+$totalReservations = count($reservations);
+$totalPages = ceil($totalReservations / $perPage);
+$offset = ($page - 1) * $perPage;
+$currentReservations = array_slice($reservations, $offset, $perPage);
 ?>
 
 <!DOCTYPE html>
@@ -82,11 +89,19 @@ foreach ($allReservations as $line) {
             </form>
         </section>
         <section id="reservations">
-            <h2>Vaše rezervace:</h2>
+            <h2>
+                <?php 
+                if ($role === 'admin') {
+                    echo 'Všechny rezervace';
+                } else {
+                    echo 'Vaše rezervace';
+                }
+                ?>
+            </h2>
             <?php if (empty($reservations)): ?>
                 <p>Nemáte žádné aktivní rezervace.</p>
             <?php else: ?>
-                <?php foreach ($reservations as $reservation): ?>
+                <?php foreach ($currentReservations as $reservation): ?>
                     <div class="reservation-item">
                         <span><?php echo "{$reservation['court']} dne {$reservation['date']} v {$reservation['time']}"; ?></span>
                         <form action="delete_reservation.php" method="POST" style="display: inline;">
@@ -97,6 +112,23 @@ foreach ($allReservations as $line) {
                 <?php endforeach; ?>
             <?php endif; ?>
         </section>
+        <?php if ($totalPages > 1): ?>
+        <section id="paging">
+            <?php if ($page > 1): ?>
+            <a href="?page=1">First</a>
+            <?php endif; ?>
+            <?php if ($page > 1 && $page != 2): ?>
+            <a href="?page=<?php echo $page - 1; ?>">Previous</a>
+            <?php endif; ?>
+            <span>Page <?php echo $page; ?> of <?php echo $totalPages; ?></span>
+            <?php if ($page < $totalPages && $page != $totalPages - 1): ?>
+            <a href="?page=<?php echo $page + 1; ?>">Next</a>
+            <?php endif; ?>
+            <?php if ($page < $totalPages): ?>
+            <a href="?page=<?php echo $totalPages; ?>">Last</a>
+            <?php endif; ?>
+        </section>
+        <?php endif; ?>
         <a href="main.php"><button type="submit">Zpět</button></a>
     </main>
     <footer>

@@ -46,7 +46,7 @@
     color: var(--secondary-color);
     background-color: var(--primary-color);
     border-radius: 5px;
-    white-space: nowrap; /* Prevents the element from changing size */
+    white-space: nowrap; 
 }
 
 .main header nav a{
@@ -192,7 +192,7 @@
 .main h3 {
     color: var(--primary-color);
     background-color: var(--secondary-color);
-    display: inline-block; /* Add this line to make the background width like the text */
+    display: inline-block; 
     padding: 5px 20px;
     border-radius: 5px;
     text-align: center;
@@ -745,7 +745,7 @@
 .profile h1{
     color: var(--secondary-color);
     background-color: var(--primary-color);
-    display: inline-block; /* Add this line to make the background width like the text */
+    display: inline-block; 
     padding: 5px 20px;
     margin: 25px;
     border-radius: 5px;
@@ -755,8 +755,7 @@
 .profile h2{
     color: var(--primary-color);
     background-color: var(--secondary-color);
-    display: inline-block; /* Add this line to make the background width like the text */
-    padding: 5px 20px;
+    display: inline-block; 
     border-radius: 5px;
     text-align: center;
 }
@@ -770,6 +769,11 @@
     border-radius: 20px;
     margin: 50px auto;
     width: 600px;
+}
+
+.profile #reservations h2{
+    margin: 20px;
+    padding: 5px;
 }
 
 .profile ul{
@@ -801,6 +805,19 @@
 
 .profile .delete-btn:hover {
     background-color: #cc0000;
+}
+
+.profile #paging {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    display: flex; 
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    margin: 50px auto;
+    padding: 5px 20px;
+    border-radius: 5px;
+    width: 200px;
 }
 
 .profile button{
