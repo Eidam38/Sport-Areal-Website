@@ -1,4 +1,5 @@
 <?php
+//Used for email validation
 if (isset($_POST['email']) && !isset($_POST['password'])) {
     if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
         echo "invalid";
@@ -9,13 +10,14 @@ if (isset($_POST['email']) && !isset($_POST['password'])) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = htmlspecialchars($_POST['email']);
+    $username = ($_POST['email']);
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
     $file = 'Data/users.txt';
     $users = file_exists($file) ? file($file, FILE_IGNORE_NEW_LINES) : [];
     
     $emailExists = false;
+    // Check if the email already exists
     foreach ($users as $line) {
         list($existingEmail) = explode('|', $line);
         if ($existingEmail === $username) {
@@ -37,6 +39,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
 } else {
+    // If GET request, check the status and display appropriate message
+    // Display error message if email already exists
     if (isset($_GET['status']) && $_GET['status'] === 'exists') {
         echo <<<HTML
         <html>
@@ -49,6 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </body>
         </html>
         HTML;
+    // Display success message if registration was successful
     } elseif (isset($_GET['status']) && $_GET['status'] === 'success') {
         echo <<<HTML
         <html>

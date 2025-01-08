@@ -1,6 +1,7 @@
 <?php
     session_start();
 
+    // Define all available reservation times
     $allTimes = ['12:00','13:00','14:00','15:00','16:00','17:00'];
     $reservedTimes = [];
     $court = null;
@@ -17,6 +18,7 @@
         $court = $_GET['court'];
         $date = $_GET['date'];
         $file = 'Data/reservations.txt';
+        // Load existing reservations from the file
         $reservations = file_exists($file) ? file($file, FILE_IGNORE_NEW_LINES) : [];
         foreach ($reservations as $line) {
             if (empty($line)) continue;
@@ -53,7 +55,8 @@
             <div class="line"></div>
         </div>
         <ul id="header_buttons">
-            <?php if(isset($_SESSION['username'])): ?>
+            <!-- Check if user is logged in and display appropriate buttons -->
+            <?php if(isset($_SESSION['username'])):?>
                     <li><a href="profile.php"><button id="login"><?php echo $_SESSION['username']?></button></a></li>
                     <li><form method="post" action="logout.php"><button type="submit" id="signup">Odhlásit se</button></form></li>
             <?php else : ?>
@@ -126,6 +129,7 @@
 
         <section id="reservation">
             <h2>Rezervace</h2>
+            <!-- Check if user is logged in and display reservation form -->
             <?php if(isset($_SESSION['username'])): ?>
             <div class="reservation-box-logged">
                 <form method="post" action="">
@@ -139,12 +143,13 @@
                     <button type="submit">Podívat se</button>
                 </form>
                 <?php
+                // Display available reservation times for the selected court and date 
                 if (isset($court) && isset($date)) {
                     $now = new DateTime();
                     foreach ($allTimes as $time) {
                         $dateTimeStr = $date . ' ' . $time . ':00';
                         $selectedDateTime = new DateTime($dateTimeStr);
-
+                        // Check if the selected time is in the past or already reserved
                         if ($selectedDateTime < $now) {
                             echo "<p>$time: Nedostupné</p>";
                         } elseif (in_array($time, $reservedTimes)) {

@@ -1,4 +1,5 @@
 <?php
+//Used for email validation
 if (isset($_POST['email']) && !isset($_POST['password'])) {
     if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
         echo "invalid";
@@ -8,21 +9,24 @@ if (isset($_POST['email']) && !isset($_POST['password'])) {
     exit;
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = ($_POST['email']);
-    $password = $_POST['password'];
 
-    $file ='Data/users.txt';
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST['email']; 
+    $password = $_POST['password']; 
+
+    $file ='Data/users.txt'; 
     $users = file_exists($file) ? file($file, FILE_IGNORE_NEW_LINES) : [];
 
     $success = false;
+    // Iterate through each user to validate credentials
     foreach ($users as $line) {
         list($existingEmail, $hashedPassword, $role) = explode('|', $line);
+        // Check if the email and password match
         if ($existingEmail === $username && password_verify($password, $hashedPassword)) {
             $success = true;
-            session_start();
-            $_SESSION['username'] = $username;
-            $_SESSION['role'] = $role;
+            session_start(); 
+            $_SESSION['username'] = $username; 
+            $_SESSION['role'] = $role; 
             break;
         }
     }
@@ -35,6 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
 } else {
+    // Display success message if login was successful
     if (isset($_GET['status']) && ($_GET['status'] === 'success' )) {
         echo <<<HTML
         <html>
@@ -47,6 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </body>
         </html>
         HTML;
+    // Display error message if login was unsuccessful
     } elseif (isset($_GET['status']) && $_GET['status'] === 'error') {
         echo <<<HTML
         <html>
