@@ -829,3 +829,18 @@
     border: none;
     font: 1em sans-serif;
 }
+
+@media print{
+    .main header {
+        position: static;
+    }
+    img {
+        display: none;
+    }
+    #map {
+        display: none;
+    }
+    section {
+        page-break-inside: avoid;
+    }
+}
