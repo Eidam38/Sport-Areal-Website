@@ -181,7 +181,6 @@
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d905.5273971101419!2d14.398774652481729!3d50.06347810735772!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470b9451e528fcb9%3A0x86dcf49f972b1617!2sDTJ%20Santo%C5%A1ka!5e0!3m2!1scs!2scz!4v1729871923562!5m2!1scs!2scz" 
                         width="600" 
                         height="450" 
-                        style="border:0;" 
                         allowfullscreen="" 
                         loading="lazy" 
                         referrerpolicy="no-referrer-when-downgrade">

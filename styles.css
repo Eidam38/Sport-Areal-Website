@@ -760,7 +760,12 @@
     text-align: center;
 }
 
-.profile #reservations{
+.profile #user_settings form{
+    gap: 10px;
+    margin: 20px;
+}
+
+.profile #admin_user_list{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -769,6 +774,34 @@
     border-radius: 20px;
     margin: 50px auto;
     width: 600px;
+}
+
+.profile #admin_user_list h2{
+    margin: 20px;
+    padding: 5px;
+}
+
+.profile #admin_user_list button{
+    color: var(--primary-color);
+    background-color: var(--secondary-color);
+    height: 31px;
+    min-width: 124px;
+    border-radius: 5px;
+    border: none;
+    font: 1em sans-serif;
+}
+
+
+
+.profile #reservations{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    border-radius: 20px;
+    margin: 50px auto;
+    width: 800px;
 }
 
 .profile #reservations h2{
@@ -843,4 +876,12 @@
     section {
         page-break-inside: avoid;
     }
+}
+
+#required{
+    color: red;
+}
+
+#error-message{
+    color: red;
 }

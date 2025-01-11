@@ -32,6 +32,78 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['profile_picture'])) 
     exit;
 }
 
+// Handle email and password change
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['new_email'])) {
+        $newUsername = trim($_POST['new_email']);
+        $allUsers = file_exists('Data/users.txt') ? file('Data/users.txt', FILE_IGNORE_NEW_LINES) : [];
+        $emailExists = false;
+
+        foreach ($allUsers as $userLine) {
+            list($storedUsername, $storedPassword, $storedRole) = explode('|', $userLine);
+            if ($storedUsername === $newUsername) {
+                $emailExists = true;
+                break;
+            }
+        }
+
+        if (!$emailExists) {
+            // Update email in users.txt
+            $updatedUsers = [];
+            foreach ($allUsers as $userLine) {
+                list($storedUsername, $storedPassword, $storedRole) = explode('|', $userLine);
+                if ($storedUsername === $username) {
+                    $updatedUsers[] = "$newUsername|$storedPassword|$storedRole";
+                } else {
+                    $updatedUsers[] = $userLine;
+                }
+            }
+            file_put_contents('Data/users.txt', implode("\n", $updatedUsers) . "\n");
+            header("Location: profile.php?status=email_success");
+        } else {
+            header("Location: profile.php?status=email_exists");
+        }
+        exit;
+    }
+
+    if (isset($_POST['new_password'])) {
+        $newPassword = password_hash($_POST['new_password'], PASSWORD_DEFAULT);
+        $allUsers = file_exists('Data/users.txt') ? file('Data/users.txt', FILE_IGNORE_NEW_LINES) : [];
+        // Update password in users.txt
+        $updatedUsers = [];
+        foreach ($allUsers as $userLine) {
+            list($storedUsername, $storedPassword, $storedRole) = explode('|', $userLine);
+            if ($storedUsername === $username) {
+                $updatedUsers[] = "$storedUsername|$newPassword|$storedRole";
+            } else {
+                $updatedUsers[] = $userLine;
+            }
+        }
+        file_put_contents('Data/users.txt', implode("\n", $updatedUsers) . "\n");
+        header("Location: profile.php?status=password_success");
+        exit;
+    }
+
+    // Admin change user role
+    if ($role === 'admin' && isset($_POST['admin_new_role']) && isset($_POST['admin_username'])) {
+        $adminNewRole = trim($_POST['admin_new_role']);
+        $adminUsername = trim($_POST['admin_username']);
+        $allUsers = file_exists('Data/users.txt') ? file('Data/users.txt', FILE_IGNORE_NEW_LINES) : [];
+        $updatedUsers = [];
+        foreach ($allUsers as $userLine) {
+            list($storedUsername, $storedPassword, $storedRole) = explode('|', $userLine);
+            if ($storedUsername === $adminUsername) {
+                $updatedUsers[] = "$storedUsername|$storedPassword|$adminNewRole";
+            } else {
+                $updatedUsers[] = $userLine;
+            }
+        }
+        file_put_contents('Data/users.txt', implode("\n", $updatedUsers) . "\n");
+        header("Location: profile.php?status=admin_role_success");
+        exit;
+    }
+}
+
 // Set user photo to default or uploaded picture
 $userPhoto = "Pictures/default-profile.jpg";
 if (file_exists("Data/uploads/{$username}.jpg")) {
@@ -44,6 +116,14 @@ if (isset($_GET['status'])) {
         echo '<div class="alert success">Profilový obrázek byl úspěšně nahrán.</div>';
     } elseif ($_GET['status'] === 'error') {
         echo '<div class="alert error">Chyba při nahrávání obrázku.</div>';
+    } elseif ($_GET['status'] === 'email_success') {
+        echo '<div class="alert success">Email byl úspěšně změněn.</div>';
+    } elseif ($_GET['status'] === 'email_exists') {
+        echo '<div class="alert error">Tento email již existuje.</div>';
+    } elseif ($_GET['status'] === 'password_success') {
+        echo '<div class="alert success">Heslo bylo úspěšně změněno.</div>';
+    } elseif ($_GET['status'] === 'admin_role_success') {
+        echo '<div class="alert success">Role uživatele byla úspěšně změněna.</div>';
     }
 }
 
@@ -93,6 +173,42 @@ $currentReservations = array_slice($reservations, $offset, $perPage);
                 <button type="submit">Nahrát novou fotku</button>
             </form>
         </section>
+        <section id="user_settings">
+            <h2>Změna emailu a hesla</h2>
+            <form action="" method="POST">
+                <label for="new_email">Nový email:</label>
+                <input type="email" name="new_email" id="new_email" required>
+                <button type="submit">Změnit email</button>
+            </form>
+            <form action="" method="POST">
+                <label for="new_password">Nové heslo:</label>
+                <input type="password" name="new_password" id="new_password" required minlength="8">
+                <button type="submit">Změnit heslo</button>
+            </form>
+        </section>
+        <?php if ($role === 'admin'): ?>
+        <section id="admin_user_list">
+            <h2>Seznam uživatelů</h2>
+            <?php
+            $allUsers = file_exists('Data/users.txt') ? file('Data/users.txt', FILE_IGNORE_NEW_LINES) : [];
+            foreach ($allUsers as $userLine) {
+                list($storedUsername, $storedPassword, $storedRole) = explode('|', $userLine);
+                echo "<div class='user-item'>";
+                echo "<span>Uživatel: $storedUsername, Role: $storedRole</span>";
+                echo "<form action='' method='POST'>";
+                echo "<input type='hidden' name='admin_username' value='$storedUsername'>";
+                echo "<label for='admin_new_role'>Nová role:</label>";
+                echo "<select name='admin_new_role'>";
+                echo "<option value='user'" . ($storedRole === 'user' ? ' selected' : '') . ">User</option>";
+                echo "<option value='admin'" . ($storedRole === 'admin' ? ' selected' : '') . ">Admin</option>";
+                echo "</select>";
+                echo "<button type='submit'>Změnit roli</button>";
+                echo "</form>";
+                echo "</div>";
+            }
+            ?>
+        </section>
+        <?php endif; ?>
         <section id="reservations">
             <h2>
                 <?php 
@@ -110,7 +226,7 @@ $currentReservations = array_slice($reservations, $offset, $perPage);
                 <?php foreach ($currentReservations as $reservation): ?>
                     <div class="reservation-item">
                         <span><?php echo "{$reservation['court']} dne {$reservation['date']} v {$reservation['time']}"; ?></span>
-                        <form action="delete_reservation.php" method="POST" style="display: inline;">
+                        <form action="delete_reservation.php" method="POST">
                             <input type="hidden" name="reservation" value="<?php echo htmlspecialchars($reservation['fullLine']); ?>">
                             <button type="submit" class="delete-btn">Zrušit rezervaci</button>
                         </form>
