@@ -163,7 +163,7 @@ $currentReservations = array_slice($reservations, $offset, $perPage);
 </head>
 <body>
     <header>
-        <h1>Profil uživatele: <?php echo $username; ?></h1>
+        <h1>Profil uživatele: <?php echo htmlspecialchars($username); ?></h1>
     </header>
     <main>
         <section id="user_photo">
@@ -194,7 +194,7 @@ $currentReservations = array_slice($reservations, $offset, $perPage);
             foreach ($allUsers as $userLine) {
                 list($storedUsername, $storedPassword, $storedRole) = explode('|', $userLine);
                 echo "<div class='user-item'>";
-                echo "<span>Uživatel: $storedUsername, Role: $storedRole</span>";
+                echo "<span>Uživatel: " . htmlspecialchars($storedUsername) . ", Role: $storedRole </span>";
                 echo "<form action='' method='POST'>";
                 echo "<input type='hidden' name='admin_username' value='$storedUsername'>";
                 echo "<label for='admin_new_role'>Nová role:</label>";
