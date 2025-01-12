@@ -4,14 +4,24 @@
  */
 session_start();
 
-$reservationToDelete = $_POST['reservation'];
-$reservations = file('Data/reservations.txt', FILE_IGNORE_NEW_LINES); 
+function deleteReservation($reservationToDelete) {
+    $reservations = file('Data/reservations.txt', FILE_IGNORE_NEW_LINES); 
 
-$newReservations = array_filter($reservations, function($line) use ($reservationToDelete) {
-    return trim($line) !== trim($reservationToDelete);
-});
+    $newReservations = array_filter($reservations, function($line) use ($reservationToDelete) {
+        return trim($line) !== trim($reservationToDelete);
+    });
 
-file_put_contents('Data/reservations.txt', implode("\n", $newReservations) . "\n");
-header('Location: profile.php');
-exit();
+    file_put_contents('Data/reservations.txt', implode("\n", $newReservations) . "\n");
+}
+
+function handleDeleteReservationRequest() {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['reservation'])) {
+        $reservationToDelete = $_POST['reservation'];
+        deleteReservation($reservationToDelete);
+        header('Location: profile.php');
+        exit();
+    }
+}
+
+handleDeleteReservationRequest();
 ?>
