@@ -1,24 +1,15 @@
 <?php
 session_start();
-if (!isset($_SESSION['username'])) {
-    header("Location: main.php");
-    exit();
-}
-$username = $_SESSION['username'];
 
-$isAdmin = false;
-if ($_SESSION['role'] === 'admin') {
-    $isAdmin = true;
+function ensureAdmin() {
+    if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'admin') {
+        header("Location: main.php");
+        exit();
+    }
 }
 
-if (!$isAdmin) {
-    header("Location: main.php");
-    exit();
-}
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email']) && isset($_POST['role'])) {
-    $emailToUpdate = $_POST['email'];
-    $newRole = $_POST['role'];
+function updateUserRole($emailToUpdate, $newRole) {
+    $users = file('Data/users.txt', FILE_IGNORE_NEW_LINES);
 
     $updatedUsers = array_map(function($user) use ($emailToUpdate, $newRole) {
         list($email, $password, $role) = explode('|', $user);
@@ -29,9 +20,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email']) && isset($_PO
     }, $users);
 
     file_put_contents('Data/users.txt', implode("\n", $updatedUsers) . "\n");
-    header("Location: admin.php");
-    exit();
 }
+
+function handleRoleUpdateRequest() {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email']) && isset($_POST['role'])) {
+        $emailToUpdate = $_POST['email'];
+        $newRole = $_POST['role'];
+        updateUserRole($emailToUpdate, $newRole);
+        header("Location: admin.php");
+        exit();
+    }
+}
+
+ensureAdmin();
+handleRoleUpdateRequest();
 
 $users = file('Data/users.txt', FILE_IGNORE_NEW_LINES);
 ?>
