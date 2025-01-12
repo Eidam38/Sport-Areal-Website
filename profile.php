@@ -1,91 +1,89 @@
 <?php
 session_start();
-if (!isset($_SESSION['username'])) {
-    header("Location: main.php");
-    exit();
-}
-$username = $_SESSION['username'];
-$profilePic = "Pictures/default-profile.jpg";
 
-if (file_exists("Data/uploads/" . $username . ".jpg")) {
-    $profilePic = "Data/uploads/" . $username . ".jpg";
+function ensureUserIsLoggedIn() {
+    if (!isset($_SESSION['username'])) {
+        header("Location: main.php");
+        exit();
+    }
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['profile_pic'])) {
-    $targetDir = "Data/uploads/";
-    $targetFile = $targetDir . $username . ".jpg";
-    if (!file_exists($targetFile)) {
+function getProfilePicPath($username) {
+    $defaultPic = "Pictures/default-profile.jpg";
+    $userPic = "Data/uploads/" . $username . ".jpg";
+    return file_exists($userPic) ? $userPic : $defaultPic;
+}
+
+function handleProfilePicUpload($username) {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['profile_pic'])) {
+        $targetDir = "Data/uploads/";
+        $targetFile = $targetDir . $username . ".jpg";
         move_uploaded_file($_FILES['profile_pic']['tmp_name'], $targetFile);
         chmod($targetFile, 0777);
-    } else {
-        move_uploaded_file($_FILES['profile_pic']['tmp_name'], $targetFile);
+        header("Location: profile.php");
+        exit();
     }
-    $profilePic = $targetFile;
-    header("Location: profile.php");
-    exit();
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['new_email'])) {
-    $newEmail = $_POST['new_email'];
-    $users = file('Data/users.txt', FILE_IGNORE_NEW_LINES);
-    $emailExists = false;
+function handleEmailChange($username) {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['new_email'])) {
+        $newEmail = $_POST['new_email'];
+        $users = file('Data/users.txt', FILE_IGNORE_NEW_LINES);
+        $emailExists = false;
 
-    foreach ($users as $user) {
-        list($email, $password, $role) = explode('|', $user);
-        if ($email === $newEmail) {
-            $emailExists = true;
-            break;
+        foreach ($users as $user) {
+            list($email, $password, $role) = explode('|', $user);
+            if ($email === $newEmail) {
+                $emailExists = true;
+                break;
+            }
+        }
+
+        if (!$emailExists) {
+            $updatedUsers = array_map(function($user) use ($username, $newEmail) {
+                list($email, $password, $role) = explode('|', $user);
+                if ($email === $username) {
+                    return "$newEmail|$password|$role";
+                }
+                return $user;
+            }, $users);
+
+            file_put_contents('Data/users.txt', implode(PHP_EOL, $updatedUsers) . PHP_EOL);
+            $_SESSION['username'] = $newEmail;
+            header("Location: profile.php");
+            exit();
+        } else {
+            echo "<p>Email already used. Please choose another one.</p>";
         }
     }
+}
 
-    if (!$emailExists) {
-        $updatedUsers = array_map(function($user) use ($username, $newEmail) {
+function handlePasswordChange($username) {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['new_password'])) {
+        $newPassword = password_hash($_POST['new_password'], PASSWORD_DEFAULT);
+        $users = file('Data/users.txt', FILE_IGNORE_NEW_LINES);
+
+        $updatedUsers = array_map(function($user) use ($username, $newPassword) {
             list($email, $password, $role) = explode('|', $user);
             if ($email === $username) {
-                return "$newEmail|$password|$role";
+                return "$email|$newPassword|$role";
             }
             return $user;
         }, $users);
 
-        file_put_contents('Data/users.txt', implode("\n", $updatedUsers) . "\n");
-
-        if (file_exists("Data/uploads/" . $username . ".jpg")) {
-            rename("Data/uploads/" . $username . ".jpg", "Data/uploads/" . $newEmail . ".jpg");
-        }
-
-        $reservations = file('Data/reservations.txt', FILE_IGNORE_NEW_LINES);
-        $updatedReservations = array_map(function($reservation) use ($username, $newEmail) {
-            return str_replace($username, $newEmail, $reservation);
-        }, $reservations);
-
-        file_put_contents('Data/reservations.txt', implode("\n", $updatedReservations) . "\n");
-
-        $_SESSION['username'] = $newEmail;
-        $username = $newEmail;
-        $profilePic = "Data/uploads/" . $username . ".jpg";
+        file_put_contents('Data/users.txt', implode(PHP_EOL, $updatedUsers) . PHP_EOL);
         header("Location: profile.php");
         exit();
-    } else {
-        $emailError = "Email already exists.";
     }
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['new_password'])) {
-    $newPassword = password_hash($_POST['new_password'], PASSWORD_DEFAULT);
-    $users = file('Data/users.txt', FILE_IGNORE_NEW_LINES);
+ensureUserIsLoggedIn();
+$username = $_SESSION['username'];
+$profilePic = getProfilePicPath($username);
 
-    $updatedUsers = array_map(function($user) use ($username, $newPassword) {
-        list($email, $password, $role) = explode('|', $user);
-        if ($email === $username) {
-            return "$email|$newPassword|$role";
-        }
-        return $user;
-    }, $users);
-
-    file_put_contents('Data/users.txt', implode("\n", $updatedUsers) . "\n");
-    header("Location: profile.php");
-    exit();
-}
+handleProfilePicUpload($username);
+handleEmailChange($username);
+handlePasswordChange($username);
 
 $reservations = file('Data/reservations.txt', FILE_IGNORE_NEW_LINES);
 $userReservations = array_filter($reservations, function($line) use ($username) {
