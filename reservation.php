@@ -1,6 +1,10 @@
 <?php
 session_start();
 
+/**
+ * This script handles the creation of a reservation for the Sport Areal website.
+ */
+
 if (isset($_GET['court'], $_GET['date'], $_GET['time']) && isset($_SESSION['username'])) {
     $username = $_SESSION['username'];
     $court = $_GET['court'];

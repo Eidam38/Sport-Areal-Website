@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * This script handles the user login process for the Sport Areal website.
+ */
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['email']; 
     $password = $_POST['password']; 
@@ -8,10 +10,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $users = file_exists($file) ? file($file, FILE_IGNORE_NEW_LINES) : [];
 
     $success = false;
-    // Iterate through each user to validate credentials
     foreach ($users as $line) {
         list($existingEmail, $hashedPassword, $role) = explode('|', $line);
-        // Check if the email and password match
         if ($existingEmail === $username && password_verify($password, $hashedPassword)) {
             $success = true;
             session_start(); 
@@ -28,8 +28,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: login.php?status=error");
         exit;
     }
-} else {
-    // Display success message if login was successful
+} 
+
+else {
     if (isset($_GET['status']) && ($_GET['status'] === 'success' )) {
         echo <<<HTML
         <html>
@@ -42,7 +43,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </body>
         </html>
         HTML;
-    // Display error message if login was unsuccessful
     } elseif (isset($_GET['status']) && $_GET['status'] === 'error') {
         echo <<<HTML
         <html>

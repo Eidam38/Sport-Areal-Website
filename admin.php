@@ -7,13 +7,8 @@ if (!isset($_SESSION['username'])) {
 $username = $_SESSION['username'];
 
 $isAdmin = false;
-$users = file('Data/users.txt', FILE_IGNORE_NEW_LINES);
-foreach ($users as $user) {
-    list($email, $password, $role) = explode('|', $user);
-    if ($email === $username && $role === 'admin') {
-        $isAdmin = true;
-        break;
-    }
+if ($_SESSION['role'] === 'admin') {
+    $isAdmin = true;
 }
 
 if (!$isAdmin) {

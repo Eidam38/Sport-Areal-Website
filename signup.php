@@ -1,4 +1,9 @@
 <?php
+
+/**
+ * This script handles the user signup process for the Sport Areal website.
+ */
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = ($_POST['email']);
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
@@ -7,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $users = file_exists($file) ? file($file, FILE_IGNORE_NEW_LINES) : [];
     
     $emailExists = false;
-    // Check if the email already exists
+    
     foreach ($users as $line) {
         list($existingEmail) = explode('|', $line);
         if ($existingEmail === $username) {
@@ -28,9 +33,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: signup.php?status=success");
         exit;
     }
-} else {
-    // If GET request, check the status and display appropriate message
-    // Display error message if email already exists
+} 
+else {
     if (isset($_GET['status']) && $_GET['status'] === 'exists') {
         echo <<<HTML
         <html>
@@ -43,7 +47,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </body>
         </html>
         HTML;
-    // Display success message if registration was successful
     } elseif (isset($_GET['status']) && $_GET['status'] === 'success') {
         echo <<<HTML
         <html>

@@ -5,7 +5,7 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 $username = $_SESSION['username'];
-$profilePic = "Pictures/default-profile.jpg"; // Default profile picture
+$profilePic = "Pictures/default-profile.jpg";
 
 if (file_exists("Data/uploads/" . $username . ".jpg")) {
     $profilePic = "Data/uploads/" . $username . ".jpg";
@@ -34,7 +34,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['new_email'])) {
     }
 
     if (!$emailExists) {
-        // Update email in users.txt
         $updatedUsers = array_map(function($user) use ($username, $newEmail) {
             list($email, $password, $role) = explode('|', $user);
             if ($email === $username) {
@@ -45,12 +44,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['new_email'])) {
 
         file_put_contents('Data/users.txt', implode("\n", $updatedUsers) . "\n");
 
-        // Rename profile picture file
         if (file_exists("Data/uploads/" . $username . ".jpg")) {
             rename("Data/uploads/" . $username . ".jpg", "Data/uploads/" . $newEmail . ".jpg");
         }
 
-        // Update reservations with new email
         $reservations = file('Data/reservations.txt', FILE_IGNORE_NEW_LINES);
         $updatedReservations = array_map(function($reservation) use ($username, $newEmail) {
             return str_replace($username, $newEmail, $reservation);
@@ -72,7 +69,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['new_password'])) {
     $newPassword = password_hash($_POST['new_password'], PASSWORD_DEFAULT);
     $users = file('Data/users.txt', FILE_IGNORE_NEW_LINES);
 
-    // Update password in users.txt
     $updatedUsers = array_map(function($user) use ($username, $newPassword) {
         list($email, $password, $role) = explode('|', $user);
         if ($email === $username) {
@@ -91,25 +87,17 @@ $userReservations = array_filter($reservations, function($line) use ($username) 
     return strpos($line, $username) !== false;
 });
 
-// Check if the user is an admin
 $isAdmin = false;
-$users = file('Data/users.txt', FILE_IGNORE_NEW_LINES);
-foreach ($users as $user) {
-    list($email, $password, $role) = explode('|', $user);
-    if ($email === $username && $role === 'admin') {
-        $isAdmin = true;
-        break;
-    }
+if ($_SESSION['role'] === 'admin') {
+    $isAdmin = true;
 }
 
-// If the user is an admin, show all reservations
 if ($isAdmin) {
     $userReservations = array_filter($reservations, function($line) {
         return !empty(trim($line));
     });
 }
 
-// Pagination
 $perPage = 5;
 $totalReservations = count($userReservations);
 $totalPages = ceil($totalReservations / $perPage);
