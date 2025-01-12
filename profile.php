@@ -14,7 +14,12 @@ if (file_exists("Data/uploads/" . $username . ".jpg")) {
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['profile_pic'])) {
     $targetDir = "Data/uploads/";
     $targetFile = $targetDir . $username . ".jpg";
-    move_uploaded_file($_FILES['profile_pic']['tmp_name'], $targetFile);
+    if (!file_exists($targetFile)) {
+        move_uploaded_file($_FILES['profile_pic']['tmp_name'], $targetFile);
+        chmod($targetFile, 0777);
+    } else {
+        move_uploaded_file($_FILES['profile_pic']['tmp_name'], $targetFile);
+    }
     $profilePic = $targetFile;
     header("Location: profile.php");
     exit();
