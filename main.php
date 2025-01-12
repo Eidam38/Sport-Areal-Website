@@ -6,7 +6,6 @@
 session_start();
 
 $allTimes = ['12:00','13:00','14:00','15:00','16:00','17:00'];
-$reservedTimes = [];
 $court = null;
 $date = null;
 
@@ -17,11 +16,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['court'], $_POST['date
     exit;
 }
 
-if (isset($_GET['court']) && isset($_GET['date'])) {
-    $court = $_GET['court'];
-    $date = $_GET['date'];
-    $file = 'Data/reservations.txt';
-    $reservations = file_exists($file) ? file($file, FILE_IGNORE_NEW_LINES) : [];
+function loadReservations($file) {
+    if (!file_exists($file)) {
+        return [];
+    }
+    return file($file, FILE_IGNORE_NEW_LINES);
+}
+
+function filterReservedTimes($reservations, $court, $date) {
+    $reservedTimes = [];
     foreach ($reservations as $line) {
         if (empty($line)) continue;
         list($user, $resCourt, $resDate, $resTime) = explode('|', $line);
@@ -29,6 +32,15 @@ if (isset($_GET['court']) && isset($_GET['date'])) {
             $reservedTimes[] = $resTime;
         }
     }
+    return $reservedTimes;
+}
+
+if (isset($_GET['court']) && isset($_GET['date'])) {
+    $court = $_GET['court'];
+    $date = $_GET['date'];
+    $file = 'Data/reservations.txt';
+    $reservations = loadReservations($file);
+    $reservedTimes = filterReservedTimes($reservations, $court, $date);
 }
 ?>
 
