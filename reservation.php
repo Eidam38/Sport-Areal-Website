@@ -13,3 +13,4 @@ if (isset($_GET['court'], $_GET['date'], $_GET['time']) && isset($_SESSION['user
     header('Location: main.php?reservation=success');
     exit;
 }
+?>

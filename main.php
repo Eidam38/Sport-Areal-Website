@@ -41,7 +41,7 @@
 </head>
 <body>
     <header>
-        <img src="Pictures/SportArealLogo.png">
+        <img src="Pictures/SportArealLogo.png" alt="Sport Areal Logo">
         <nav id="header_nav">
             <a href="#about" id="nav_about">O nás</a>
             <a href="#gallery">Galerie</a>
@@ -60,8 +60,8 @@
                     <li><a href="profile.php"><button id="login"><?php echo $_SESSION['username']?></button></a></li>
                     <li><form method="post" action="logout.php"><button type="submit" id="signup">Odhlásit se</button></form></li>
             <?php else : ?>
-                    <li><a href="login.php"><button id="login">Přihlásit se</button></a></li>
-                    <li><a href="signup.php"><button id="signup">Registrovat se</button></a></li>
+                    <li><a id="login" href="login.php">Přihlásit se</a></li>
+                    <li><a id="signup" href="signup.php">Zaregistrovat se</a></li>
             <?php endif; ?>
         </ul>
     </header>
@@ -90,15 +90,15 @@
         <section id="gallery">
             <h2>Galerie</h2>
             <div>
-                <img src="Pictures/football_field.png">
-                <img src="Pictures/football_field (2).png">
-                <img src="Pictures/football_field (3).png">
-                <img src="Pictures/tennis_court.png">
-                <img src="Pictures/pingpong.png">
-                <img src="Pictures/pimgpong(1).png">
-                <img src="Pictures/pindpong(2).png">
-                <img src="Pictures/soccer.png">
-                <img src="Pictures/soccer(1).png">
+                <img src="Pictures/football_field.png" alt="Football">
+                <img src="Pictures/football_field(2).png" alt="Football">
+                <img src="Pictures/football_field(3).png" alt="Football">
+                <img src="Pictures/tennis_court.png" alt="Tennis">
+                <img src="Pictures/pingpong.png" alt="Ping pong">
+                <img src="Pictures/pimgpong(1).png" alt="Ping pong">
+                <img src="Pictures/pindpong(2).png" alt="Ping pong">
+                <img src="Pictures/soccer.png" alt="Soccer">
+                <img src="Pictures/soccer(1).png" alt="Soccer">
             </div>
         </section>
 
