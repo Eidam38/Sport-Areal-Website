@@ -4,6 +4,13 @@
  * This script handles the user signup process for the Sport Areal website.
  */
 
+/**
+ * Checks if a user with the given username already exists.
+ * 
+ * @param array $users The array of users.
+ * @param string $username The username to check.
+ * @return bool True if the user exists, false otherwise.
+ */
 function userExists($users, $username) {
     foreach ($users as $line) {
         list($existingEmail) = explode('|', $line);
@@ -14,11 +21,27 @@ function userExists($users, $username) {
     return false;
 }
 
+/**
+ * Adds a new user to the users.txt file.
+ * 
+ * @param string $file The path to the users file.
+ * @param string $username The username of the user.
+ * @param string $password The password of the user.
+ * @param string $role The role of the user.
+ * @return void
+ */
 function addUser($file, $username, $password, $role = 'user') {
     $userLine = $username . '|' . $password . '|' . $role . PHP_EOL;
     file_put_contents($file, $userLine, FILE_APPEND);
 }
 
+/**
+ * Handles the signup request from a POST form submission.
+ * 
+ * @param string $username The username (email) of the user.
+ * @param string $password The password of the user.
+ * @return void
+ */
 function handleSignupRequest() {
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $username = $_POST['email'];

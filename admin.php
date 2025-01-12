@@ -1,6 +1,15 @@
 <?php
+/**
+ * This script handles the role update for the Sport Areal website.
+ */
+
 session_start();
 
+/**
+ * Ensures the user is an admin. If not, redirects to the main page.
+ *
+ * @return void
+ */
 function ensureAdmin() {
     if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'admin') {
         header("Location: main.php");
@@ -8,6 +17,13 @@ function ensureAdmin() {
     }
 }
 
+/**
+ * Updates the role of a user in the users.txt file.
+ *
+ * @param string $emailToUpdate The email of the user to update.
+ * @param string $newRole The new role to assign to the user.
+ * @return void
+ */
 function updateUserRole($emailToUpdate, $newRole) {
     $users = file('Data/users.txt', FILE_IGNORE_NEW_LINES);
 
@@ -22,6 +38,13 @@ function updateUserRole($emailToUpdate, $newRole) {
     file_put_contents('Data/users.txt', implode("\n", $updatedUsers) . "\n");
 }
 
+/**
+ * Handles the role update request from a POST form submission.
+ *
+ * @param string $emailToUpdate The email of the user to update.
+ * @param string $newRole The new role to assign to the user.
+ * @return void
+ */
 function handleRoleUpdateRequest() {
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['email']) && isset($_POST['role'])) {
         $emailToUpdate = $_POST['email'];

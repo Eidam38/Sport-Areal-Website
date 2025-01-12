@@ -1,6 +1,15 @@
 <?php
+/**
+ * This script handles the user profile page for the Sport Areal website.
+ */
+
 session_start();
 
+/**
+ * Ensures the user is logged in. If not, redirects to the main page.
+ *
+ * @return void
+ */
 function ensureUserIsLoggedIn() {
     if (!isset($_SESSION['username'])) {
         header("Location: main.php");
@@ -8,12 +17,24 @@ function ensureUserIsLoggedIn() {
     }
 }
 
+/**
+ * Returns the path to the profile picture of a user.
+ *
+ * @param string $username The username of the user.
+ * @return string The path to the profile picture.
+ */
 function getProfilePicPath($username) {
     $defaultPic = "Pictures/default-profile.jpg";
     $userPic = "Data/uploads/" . $username . ".jpg";
     return file_exists($userPic) ? $userPic : $defaultPic;
 }
 
+/**
+ * Handles the profile picture upload request from a POST form submission.
+ *
+ * @param string $username The username of the user.
+ * @return void
+ */
 function handleProfilePicUpload($username) {
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['profile_pic'])) {
         $targetDir = "Data/uploads/";
@@ -25,6 +46,15 @@ function handleProfilePicUpload($username) {
     }
 }
 
+/**
+ * Handles the email change request from a POST form submission.
+ *
+ * @param string $username The username of the user.
+ * @param string $newEmail The new email to assign to the user.
+ * @param string $users The array of users.
+ * @param string $emailExists A flag indicating if the new email already exists.
+ * @return void
+ */
 function handleEmailChange($username) {
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['new_email'])) {
         $newEmail = $_POST['new_email'];
@@ -58,6 +88,14 @@ function handleEmailChange($username) {
     }
 }
 
+/**
+ * Handles the password change request from a POST form submission.
+ *
+ * @param string $username The username of the user.
+ * @param string $newPassword The new password to assign to the user.
+ * @param string $users The array of users.
+ * @return void
+ */
 function handlePasswordChange($username) {
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['new_password'])) {
         $newPassword = password_hash($_POST['new_password'], PASSWORD_DEFAULT);

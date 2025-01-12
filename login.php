@@ -3,6 +3,13 @@
  * This script handles the user login process for the Sport Areal website.
  */
 
+/**
+ * Authenticates a user by checking the provided username and password against the users.txt file.
+ *
+ * @param string $username The username (email) of the user.
+ * @param string $password The password of the user.
+ * @return bool True if authentication is successful, false otherwise.
+ */
 function authenticateUser($username, $password) {
     $file = 'Data/users.txt'; 
     $users = file_exists($file) ? file($file, FILE_IGNORE_NEW_LINES) : [];
@@ -19,6 +26,13 @@ function authenticateUser($username, $password) {
     return false;
 }
 
+/**
+ * Handles the login request from a POST form submission.
+ *
+ * @param string $username The username (email) of the user.
+ * @param string $password The password of the user.
+ * @return void
+ */
 function handleLoginRequest() {
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $username = $_POST['email']; 

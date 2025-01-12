@@ -16,6 +16,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['court'], $_POST['date
     exit;
 }
 
+/**
+ * Loads reservations from a file.
+ *
+ * @param string $file The path to the reservations file.
+ * @return array The list of reservations.
+ */
 function loadReservations($file) {
     if (!file_exists($file)) {
         return [];
@@ -23,6 +29,15 @@ function loadReservations($file) {
     return file($file, FILE_IGNORE_NEW_LINES);
 }
 
+
+/**
+ * Filters reserved times for a specific court and date.
+ *
+ * @param array $reservations The list of reservations.
+ * @param string $court The court to filter reservations for.
+ * @param string $date The date to filter reservations for.
+ * @return array The list of reserved times.
+ */
 function filterReservedTimes($reservations, $court, $date) {
     $reservedTimes = [];
     foreach ($reservations as $line) {
