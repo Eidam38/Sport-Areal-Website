@@ -2,61 +2,65 @@
 /**
  * This script handles the user login process for the Sport Areal website.
  */
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST['email']; 
-    $password = $_POST['password']; 
 
-    $file ='Data/users.txt'; 
+function authenticateUser($username, $password) {
+    $file = 'Data/users.txt'; 
     $users = file_exists($file) ? file($file, FILE_IGNORE_NEW_LINES) : [];
 
-    $success = false;
     foreach ($users as $line) {
         list($existingEmail, $hashedPassword, $role) = explode('|', $line);
         if ($existingEmail === $username && password_verify($password, $hashedPassword)) {
-            $success = true;
-            session_start(); 
+            session_start();
             $_SESSION['username'] = $username; 
-            $_SESSION['role'] = $role; 
-            break;
+            $_SESSION['role'] = $role;
+            return true;
         }
     }
+    return false;
+}
 
-    if ($success) {
-        header("Location: login.php?status=success");
-        exit;
+function handleLoginRequest() {
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $username = $_POST['email']; 
+        $password = $_POST['password']; 
+
+        if (authenticateUser($username, $password)) {
+            header("Location: login.php?status=success");
+            exit;
+        } else {
+            header("Location: login.php?status=error");
+            exit;
+        }
     } else {
-        header("Location: login.php?status=error");
-        exit;
-    }
-} 
-
-else {
-    if (isset($_GET['status']) && ($_GET['status'] === 'success' )) {
-        echo <<<HTML
-        <html>
-        <head><title>Přihlášení úspěšné</title></head>
-        <body class="login">
-            <div id='popup'>
-                <h3>Přihlášení úspěšné!</h3>
-                <a href="main.php"><button>Přejít na hlavní stránku</button></a>
-            </div>
-        </body>
-        </html>
-        HTML;
-    } elseif (isset($_GET['status']) && $_GET['status'] === 'error') {
-        echo <<<HTML
-        <html>
-        <head><title>Přihlášení neúspěšné</title></head>
-        <body class="login">
-            <div id='popup'>
-                <h3>Neplatné přihlašovací údaje</h3>
-                <a href="login.php"><button>Zkusit znovu</button></a>
-            </div>
-        </body>
-        </html>
-        HTML;
+        if (isset($_GET['status']) && $_GET['status'] === 'success') {
+            echo <<<HTML
+            <html>
+            <head><title>Přihlášení úspěšné</title></head>
+            <body class="login">
+                <div id='popup'>
+                    <h3>Přihlášení úspěšné!</h3>
+                    <a href="main.php"><button>Přejít na hlavní stránku</button></a>
+                </div>
+            </body>
+            </html>
+HTML;
+        } elseif (isset($_GET['status']) && $_GET['status'] === 'error') {
+            echo <<<HTML
+            <html>
+            <head><title>Přihlášení neúspěšné</title></head>
+            <body class="login">
+                <div id='popup'>
+                    <h3>Neplatné přihlašovací údaje</h3>
+                    <a href="login.php"><button>Zkusit znovu</button></a>
+                </div>
+            </body>
+            </html>
+HTML;
+        }
     }
 }
+
+handleLoginRequest();
 ?>
 
 <!DOCTYPE html>
