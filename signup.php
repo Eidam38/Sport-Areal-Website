@@ -4,63 +4,70 @@
  * This script handles the user signup process for the Sport Areal website.
  */
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = ($_POST['email']);
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-
-    $file = 'Data/users.txt';
-    $users = file_exists($file) ? file($file, FILE_IGNORE_NEW_LINES) : [];
-    
-    $emailExists = false;
-    
+function userExists($users, $username) {
     foreach ($users as $line) {
         list($existingEmail) = explode('|', $line);
         if ($existingEmail === $username) {
-            $emailExists = true;
-            break;
+            return true;
         }
     }
+    return false;
+}
 
-    if ($emailExists) {
-        header("Location: signup.php?status=exists");
-        exit;
+function addUser($file, $username, $password, $role = 'user') {
+    $userLine = $username . '|' . $password . '|' . $role . PHP_EOL;
+    file_put_contents($file, $userLine, FILE_APPEND);
+}
+
+function handleSignupRequest() {
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $username = $_POST['email'];
+        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+
+        $file = 'Data/users.txt';
+        $users = file_exists($file) ? file($file, FILE_IGNORE_NEW_LINES) : [];
+
+        if (userExists($users, $username)) {
+            header("Location: signup.php?status=exists");
+            exit;
+        } else {
+            addUser($file, $username, $password);
+            session_start();
+            $_SESSION['username'] = $username;
+            $_SESSION['role'] = 'user';
+            header("Location: signup.php?status=success");
+            exit;
+        }
     } else {
-        $userLine = $username . '|' . $password . '|user' . PHP_EOL;
-        file_put_contents($file, $userLine, FILE_APPEND);
-        session_start();
-        $_SESSION['username'] = $username;
-        $_SESSION['role'] = 'user';
-        header("Location: signup.php?status=success");
-        exit;
-    }
-} 
-else {
-    if (isset($_GET['status']) && $_GET['status'] === 'exists') {
-        echo <<<HTML
-        <html>
-        <head><title>Registrace neuspěšná</title></head>
-        <body class="signup">
-            <div id='popup'>
-                <h3>Email již existuje</h3>
-                <a href="signup.php"><button>Zkusit znovu</button></a>
-            </div>
-        </body>
-        </html>
-        HTML;
-    } elseif (isset($_GET['status']) && $_GET['status'] === 'success') {
-        echo <<<HTML
-        <html>
-        <head><title>Registrace úspěšná</title></head>
-        <body class="signup">
-            <div id='popup'>
-                <h3>Byli jste úspěšně zaregistrováni!</h3>
-                <a href="main.php"><button>Přejít na hlavní stránku</button></a>
-            </div>
-        </body>
-        </html>
-        HTML;
+        if (isset($_GET['status']) && $_GET['status'] === 'exists') {
+            echo <<<HTML
+            <html>
+            <head><title>Registrace neuspěšná</title></head>
+            <body class="signup">
+                <div id='popup'>
+                    <h3>Email již existuje</h3>
+                    <a href="signup.php"><button>Zkusit znovu</button></a>
+                </div>
+            </body>
+            </html>
+HTML;
+        } elseif (isset($_GET['status']) && $_GET['status'] === 'success') {
+            echo <<<HTML
+            <html>
+            <head><title>Registrace úspěšná</title></head>
+            <body class="signup">
+                <div id='popup'>
+                    <h3>Byli jste úspěšně zaregistrováni!</h3>
+                    <a href="main.php"><button>Přejít na hlavní stránku</button></a>
+                </div>
+            </body>
+            </html>
+HTML;
+        }
     }
 }
+
+handleSignupRequest();
 ?>
 
 <!DOCTYPE html>
