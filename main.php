@@ -1,6 +1,8 @@
 <?php
 /**
  * This script handles the reservation times and displays the main HTML structure of the Sport Areal website.
+ * 
+ * @author Adam Šilhavík
  */
 
 session_start();
