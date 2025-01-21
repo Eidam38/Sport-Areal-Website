@@ -163,9 +163,9 @@ if (isset($_GET['court']) && isset($_GET['date'])) {
             <div class="reservation-box-logged">
                 <form method="post" action="">
                     <select name="court" id="court">
-                        <option value="football" <?php if (isset($court) && $court == 'football') echo 'selected'; ?>>Fotbalové hřiště</option>
-                        <option value="tennis" <?php if (isset($court) && $court == 'tennis') echo 'selected'; ?>>Tennisový kurt</option>
-                        <option value="badminton" <?php if (isset($court) && $court == 'badminton') echo 'selected'; ?>>Badmintonový kurt</option>
+                        <option value="Fotbalové hřiště" <?php if (isset($court) && $court == 'Fotbalové hřiště') echo 'selected'; ?>>Fotbalové hřiště</option>
+                        <option value="Tennisový kurt" <?php if (isset($court) && $court == 'Tennisový kurt') echo 'selected'; ?>>Tennisový kurt</option>
+                        <option value="Badmintonový kurt" <?php if (isset($court) && $court == 'Badmintonový kurt') echo 'selected'; ?>>Badmintonový kurt</option>
                     </select>
                     <label for="date">Datum:</label>
                     <input type="date" name="date" id="date" value="<?php echo isset($date) ? htmlspecialchars($date) : ''; ?>">
@@ -174,6 +174,7 @@ if (isset($_GET['court']) && isset($_GET['date'])) {
                 <?php
                 if (isset($court) && isset($date)) {
                     $now = new DateTime();
+                    $formattedDate = DateTime::createFromFormat('Y-m-d', $date)->format('d.m.Y');
                     foreach ($allTimes as $time) {
                         $dateTimeStr = $date . ' ' . $time . ':00';
                         $selectedDateTime = new DateTime($dateTimeStr);
@@ -182,7 +183,7 @@ if (isset($_GET['court']) && isset($_GET['date'])) {
                         } elseif (in_array($time, $reservedTimes)) {
                             echo "<p>$time: Obsazeno</p>";
                         } else {
-                            echo "<p>$time: <a href='reservation.php?court=$court&date=$date&time=$time'>Reservovat</a></p>";
+                            echo "<p>$time: <a href='reservation.php?court=$court&date=$formattedDate&time=$time'>Reservovat</a></p>";
                         }
                     }
                 }

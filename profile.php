@@ -162,28 +162,28 @@ $paginatedReservations = array_slice($userReservations, $start, $perPage);
         <h1><?php echo htmlspecialchars($username); ?></h1>
         <img src="<?php echo htmlspecialchars($profilePic); ?>" alt="Profile Picture" width="150" height="150">
         <form action="profile.php" method="post" enctype="multipart/form-data">
-            <label for="profile_pic">Upload new profile picture:</label>
+            <label for="profile_pic">Nahraj novou fotku:</label>
             <input type="file" name="profile_pic" id="profile_pic">
-            <input type="submit" value="Upload">
+            <input type="submit" value="Nahrát">
         </form>
         <h2>Změnit email</h2>
         <form action="profile.php" method="post">
-            <label for="new_email">New Email:</label>
+            <label for="new_email">Nový email:</label>
             <input type="email" name="new_email" id="new_email" required>
-            <input type="submit" value="Change Email">
+            <input type="submit" value="Změnit email">
         </form>
         <?php if (isset($emailError)): ?>
             <p style="color:red;"><?php echo htmlspecialchars($emailError); ?></p>
         <?php endif; ?>
         <h2>Změnit heslo</h2>
         <form action="profile.php" method="post">
-            <label for="new_password">New Password:</label>
+            <label for="new_password">Nové heslo:</label>
             <input type="password" name="new_password" id="new_password" required minlength="8">
-            <input type="submit" value="Change Password">
+            <input type="submit" value="Změnit heslo">
         </form>
     </section>
     <section id="reservations">
-        <h2>Reservace</h2>
+        <h2>Rezervace</h2>
         <ul>
             <?php foreach ($paginatedReservations as $reservation): ?>
                 <?php list($email, $sport, $date, $time) = explode('|', $reservation); ?>
@@ -211,7 +211,7 @@ $paginatedReservations = array_slice($userReservations, $start, $perPage);
     </div>
     <a href="main.php">Zpět</a>
         <?php if ($isAdmin): ?>
-            <a href="admin.php">Admin Page</a>
+            <a href="admin.php">Admin</a>
         <?php endif; ?>
 </body>
 </html>

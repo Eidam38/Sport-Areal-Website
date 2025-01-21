@@ -83,7 +83,7 @@ $users = file('Data/users.txt', FILE_IGNORE_NEW_LINES);
                             <option value="user" <?php if ($role === 'user') echo 'selected'; ?>>User</option>
                             <option value="admin" <?php if ($role === 'admin') echo 'selected'; ?>>Admin</option>
                         </select>
-                        <input type="submit" value="Change Role">
+                        <input type="submit" value="Změnit roli">
                     </form>
                 </li>
             <?php endforeach; ?>
