@@ -24,7 +24,7 @@ function ensureUserIsLoggedIn() {
  * @return string The path to the profile picture.
  */
 function getProfilePicPath($username) {
-    $defaultPic = "Pictures/default-profile.jpg";
+    $defaultPic = "Picture/default-profile.jpg";
     $userPic = "Data/uploads/" . $username . ".jpg";
     return file_exists($userPic) ? $userPic : $defaultPic;
 }
@@ -160,7 +160,7 @@ $paginatedReservations = array_slice($userReservations, $start, $perPage);
     <div id="row">
     <section id="details">
         <h1><?php echo htmlspecialchars($username); ?></h1>
-        <img src="<?php echo htmlspecialchars($profilePic); ?>" alt="Profile Picture" width="150" height="150">
+        <img src="<?php echo htmlspecialchars($profilePic); ?>" alt="Profile Picture" width="200" height="200">
         <form action="profile.php" method="post" enctype="multipart/form-data">
             <label for="profile_pic">Nahraj novou fotku:</label>
             <input type="file" name="profile_pic" id="profile_pic">

@@ -165,7 +165,7 @@
 .main #hero {
     height: 600px;
     padding: 100px;
-    background-image: url(Pictures/FootballFieldBackground.png);
+    background-image: url(Picture/FootballFieldBackground.png);
     background-position: center;
     background-size: cover;
     display: flex;
@@ -472,7 +472,7 @@
     color: var(--primary-color);
     text-align: center;
     min-height: 100vh;
-    background-image: url(Pictures/SignupLoginBackground.jpg);
+    background-image: url(Picture/SignupLoginBackground.jpg);
     background-size: cover;
     background-position: right;
     overflow: hidden;
@@ -608,7 +608,7 @@
     color: var(--primary-color);
     text-align: center;
     min-height: 100vh;
-    background-image: url(Pictures/SignupLoginBackground.jpg);
+    background-image: url(Picture/SignupLoginBackground.jpg);
     background-size: cover;
     background-position: right;
     overflow: hidden;

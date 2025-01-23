@@ -72,7 +72,7 @@ if (isset($_GET['court']) && isset($_GET['date'])) {
 </head>
 <body>
     <header>
-        <img src="Pictures/SportArealLogo.png" alt="Sport Areal Logo">
+        <img src="Picture/SportArealLogo.png" alt="Sport Areal Logo">
         <nav id="header_nav">
             <a href="#about" id="nav_about">O nás</a>
             <a href="#gallery">Galerie</a>
@@ -120,15 +120,15 @@ if (isset($_GET['court']) && isset($_GET['date'])) {
         <section id="gallery">
             <h2>Galerie</h2>
             <div>
-                <img src="Pictures/football_field.png" alt="Football">
-                <img src="Pictures/football_field(2).png" alt="Football">
-                <img src="Pictures/football_field(3).png" alt="Football">
-                <img src="Pictures/tennis_court.png" alt="Tennis">
-                <img src="Pictures/pingpong.png" alt="Ping pong">
-                <img src="Pictures/pimgpong(1).png" alt="Ping pong">
-                <img src="Pictures/pindpong(2).png" alt="Ping pong">
-                <img src="Pictures/soccer.png" alt="Soccer">
-                <img src="Pictures/soccer(1).png" alt="Soccer">
+                <img src="Picture/football_field.png" alt="Football">
+                <img src="Picture/football_field(2).png" alt="Football">
+                <img src="Picture/football_field(3).png" alt="Football">
+                <img src="Picture/tennis_court.png" alt="Tennis">
+                <img src="Picture/pingpong.png" alt="Ping pong">
+                <img src="Picture/pimgpong(1).png" alt="Ping pong">
+                <img src="Picture/pindpong(2).png" alt="Ping pong">
+                <img src="Picture/soccer.png" alt="Soccer">
+                <img src="Picture/soccer(1).png" alt="Soccer">
             </div>
         </section>
 
@@ -168,7 +168,7 @@ if (isset($_GET['court']) && isset($_GET['date'])) {
                         <option value="Badmintonový kurt" <?php if (isset($court) && $court == 'Badmintonový kurt') echo 'selected'; ?>>Badmintonový kurt</option>
                     </select>
                     <label for="date">Datum:</label>
-                    <input type="date" name="date" id="date" value="<?php echo isset($date) ? htmlspecialchars($date) : ''; ?>">
+                    <input type="date" name="date" id="date" min="<?php echo date('Y-m-d'); ?>" value="<?php echo isset($date) ? htmlspecialchars($date) : ''; ?>">
                     <button type="submit">Podívat se</button>
                 </form>
                 <?php
