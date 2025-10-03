@@ -5,6 +5,9 @@
  * @author Adam Šilhavík
  */
 
+// Nastavení časové zóny pro Českou republiku
+date_default_timezone_set('Europe/Prague');
+
 session_start();
 
 $allTimes = ['12:00','13:00','14:00','15:00','16:00','17:00'];
@@ -175,10 +178,19 @@ if (isset($_GET['court']) && isset($_GET['date'])) {
                 if (isset($court) && isset($date)) {
                     $now = new DateTime();
                     $formattedDate = DateTime::createFromFormat('Y-m-d', $date)->format('d.m.Y');
+                    
                     foreach ($allTimes as $time) {
                         $dateTimeStr = $date . ' ' . $time . ':00';
                         $selectedDateTime = new DateTime($dateTimeStr);
-                        if ($selectedDateTime < $now) {
+                        
+                        $isToday = $date === date('Y-m-d');
+                        $isPastTime = false;
+                        
+                        if ($isToday) {
+                            $isPastTime = $selectedDateTime <= $now;
+                        }
+                        
+                        if ($isPastTime) {
                             echo "<p>$time: Nedostupné</p>";
                         } elseif (in_array($time, $reservedTimes)) {
                             echo "<p>$time: Obsazeno</p>";

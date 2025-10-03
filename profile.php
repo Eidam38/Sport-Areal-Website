@@ -39,9 +39,24 @@ function handleProfilePicUpload($username) {
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['profile_pic'])) {
         $targetDir = "Data/uploads/";
         $targetFile = $targetDir . $username . ".jpg";
-        move_uploaded_file($_FILES['profile_pic']['tmp_name'], $targetFile);
+        $imageFileType = strtolower(pathinfo($_FILES['profile_pic']['name'], PATHINFO_EXTENSION));
+
+        if ($imageFileType != "jpg" && $imageFileType != "jpeg") {
+            header("Location: profile.php?invalid_image_type");
+            exit();
+        }
+
+        $imageData = file_get_contents($_FILES['profile_pic']['tmp_name']);
+        $image = imagecreatefromstring($imageData);
+
+        $newWidth = 200;
+        $newHeight = 200;
+        $imageResized = imagecreatetruecolor($newWidth, $newHeight);
+        imagecopyresampled($imageResized, $image, 0, 0, 0, 0, $newWidth, $newHeight, imagesx($image), imagesy($image));
+        imagejpeg($imageResized, $targetFile, 100);
+
         chmod($targetFile, 0777);
-        header("Location: profile.php");
+        header("Location: profile.php?pic_uploaded");
         exit();
     }
 }
@@ -83,7 +98,7 @@ function handleEmailChange($username) {
             header("Location: profile.php");
             exit();
         } else {
-            echo "<p>Email already used. Please choose another one.</p>";
+            header("Location: profile.php?email_exists");
         }
     }
 }
@@ -110,7 +125,7 @@ function handlePasswordChange($username) {
         }, $users);
 
         file_put_contents('Data/users.txt', implode(PHP_EOL, $updatedUsers) . PHP_EOL);
-        header("Location: profile.php");
+        header("Location: profile.php?password_changed");
         exit();
     }
 }
@@ -122,6 +137,22 @@ $profilePic = getProfilePicPath($username);
 handleProfilePicUpload($username);
 handleEmailChange($username);
 handlePasswordChange($username);
+
+if (isset($_GET['invalid_image_type'])) {
+    echo "<p>špatný typ obrázku, použíte jpg</p>";
+}
+elseif (isset($_GET['pic_uploaded'])) {
+    echo "<p>obrázek byl nahrán</p>";
+}
+elseif (isset($_GET['email_exists'])) {
+    $emailError = "Email již existuje";
+}
+elseif (isset($_GET['email_changed'])) {
+    echo "<p>Email byl změněn</p>";
+}
+elseif (isset($_GET['password_changed'])) {
+    echo "<p>Heslo bylo změněno</p>";
+}
 
 $reservations = file('Data/reservations.txt', FILE_IGNORE_NEW_LINES);
 $userReservations = array_filter($reservations, function($line) use ($username) {
